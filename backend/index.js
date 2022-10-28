@@ -1,19 +1,12 @@
 const express = require('express')
-const mongoose = require('mongoose')
+const assets = require('./routers/assetsRouter')
+const spends = require ('./routers/spendsRouter')
 
 const app = express()
 const port = 3000
 
-
-mongoose.connect('mongodb://127.0.0.1:27017/taxi')
-
-app.get('/', (req, res) => {
-  res.send('Hello sss!')
-})
-
-app.get('/api', (req,res)=>{
-  res.send("API")
-})
+app.use('/assets', assets)
+app.use('/spends', spends)
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
