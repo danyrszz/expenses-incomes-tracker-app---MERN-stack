@@ -5,9 +5,12 @@ const spends = require ('./routers/spendsRouter')
 const app = express()
 const port = 3000
 
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true })) 
+
 app.use('/assets', assets)
 app.use('/spends', spends)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Server running...`)
 })

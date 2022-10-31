@@ -8,6 +8,7 @@ const spendSchema = new Schema({
   category : String,
   amount : Number,
   date : Date,
+  payed : Boolean,
   asset : {type:Schema.Types.ObjectId, ref: 'Asset'}
 })
 

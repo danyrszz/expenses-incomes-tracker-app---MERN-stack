@@ -6,6 +6,7 @@ const assetSchema = new Schema({
   name: String,
   assetCost : Number,
   earnings : Number,
+  realEarnings : Number,
   investmentRecoveryDate : Date,
   totalIncomes : Number,
   investmentRecoveryProgress : Number,
