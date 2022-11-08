@@ -1,24 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
+const responseObject = require('../utils/utils')
 
 const spend = require('../models/spends')
 const asset = require('../models/assets')
 
-const errorObject = (error)=> {
-  return {
-    error : error,
-    message : "Error al realizar la consulta. Revisa tus parametros.",
-    ok : false
-  }
-}
 
-mongoose.connect('mongodb://127.0.0.1:27017/taxi')
+mongoose.connect('mongodb://127.0.0.1:27017/taxi') 
 
 //get all of the spends
 router.get('/', async (req,res,next)=>{
   if(req.query.order===undefined){
-    res.json ( await spend.find({}).populate('asset'))
+    res.json ( await spend.find({}).populate('asset','name -_id'))
   }else{
     next()
   }
@@ -26,7 +20,7 @@ router.get('/', async (req,res,next)=>{
 
 //sort all spends by amount 
 router.get('/', async(req,res)=>{
-  const spends = await spend.find().sort({amount:req.query.order})
+  const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
   res.json(spends)
 })
 
@@ -52,7 +46,7 @@ router.get('/startingfromdate/:date', async (req,res) => {
     const spends = await spend.find({date: {$gte: new Date(req.params.date)}}).populate('asset')
     res.json(spends)
   }catch(error){
-    res.status(400).json(errorObject(error))
+    res.status(400).json(responseObject(error, false, "Error al realizar la consulta. Revisa tus parametros."))
   }
 })
 
@@ -66,14 +60,25 @@ router.get('/betweendates/:date1/:date2', async (req,res)=>{
     .populate('asset')
     res.json(spends)
   } catch(error) {
-    res.status(400).json(errorObject(error))
+    res.status(400).json(responseObject(error, false, "Error al realizar la consulta. Revisa tus parametros."))
   }
 })
 
 router.post('/', async (req,res)=>{
   const {name, description, category, amount, assetId, payed} = req.body
   const date = new Date (req.body.date)
-  const data = new spend ({
+  if(
+    name == undefined ||
+    category == undefined ||
+    amount == undefined  ||
+    assetId == undefined ||
+    payed == undefined ||
+    date == undefined
+    ){
+    res.status(500).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
+    return
+  }
+  const spendData = new spend ({
     _id : mongoose.Types.ObjectId(),
     name : name,
     description : description,
@@ -83,35 +88,28 @@ router.post('/', async (req,res)=>{
     payed : payed,
     assetId : mongoose.Types.ObjectId(assetId)
   })
-  const currentAsset = await asset.find({id:assetId})
-  res.json("ok")
+
+  const currentAsset = await asset.findById(assetId)
   try{
-    await data.save()
+    await spendData.save()
     if(payed){
       const updatedAsset = await asset.findOneAndUpdate(
         {id:assetId},
-        {
-        totalIncomes : currentAsset[0].totalIncomes + amount,
-        realEarnings : currentAsset[0].realEarnings - amount,
-        }, 
+        {realEarnings : currentAsset.realEarnings - amount}, 
         {new : true})
       if(updatedAsset.realEarnings<0){
-        await asset.findOneAndUpdate(
-          {id:assetId},
-          {investmentRecoveryProgress : 100-(((updatedAsset.realEarnings*100)*-1)/currentAsset[0].assetCost)
-        })      
+        await asset.findOneAndUpdate({id : assetId},
+          {investmentRecoveryProgress : 100-(((updatedAsset.realEarnings*100)*-1)/currentAsset.assetCost)})      
       }
     }else{
-      await asset.findOneAndUpdate({id:assetId},{
-        totalIncomes : currentAsset[0].totalIncomes + amount,
-        earnings : currentAsset[0].earnings - amount,
-      })
+      await asset.findOneAndUpdate(
+        {id : assetId},
+        {earnings : currentAsset.earnings - amount})
     }
-    res.json("Informacion actualizada correctamente")
+    res.json(responseObject(null,true,"Informacion actualizada correctamente"))
   }catch(e){
-      res.json(errorObject(e))
+      res.json(responseObject(e, false, "Error al realizar la consulta. Revisa tus parametros."))
   }
 })
-
 
 module.exports = router
