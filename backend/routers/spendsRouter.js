@@ -2,10 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const responseObject = require('../utils/utils')
+const {getAsset, updateRecoveryProgress} = require('./common')
 
 const spend = require('../models/spends')
 const asset = require('../models/assets')
-
 
 mongoose.connect('mongodb://127.0.0.1:27017/taxi') 
 
@@ -25,8 +25,12 @@ router.get('/', async(req,res)=>{
 })
 
 //get spends filtered by category
-router.get('/category/:category', async (req,res)=>{
-  res.json( await spend.find({category : req.params.category}).populate('asset'))
+router.get('/category/:category', async (req,res,next)=>{
+  try{
+    res.json( await spend.find({category : req.params.category}).populate('asset', 'name -_id'))
+  }catch(error){
+    res.status(400).json(responseObject(error,false,"ha ocurrido un error"))
+  }
 })
 
 //get spends filtered by amount
@@ -37,8 +41,6 @@ router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
   console.log(req.query.sort)
   res.json(spends)
 })
-
-//sort spends filtered by amount
 
 //filter the spends starting from the provided date
 router.get('/startingfromdate/:date', async (req,res) => {
@@ -64,7 +66,9 @@ router.get('/betweendates/:date1/:date2', async (req,res)=>{
   }
 })
 
-router.post('/', async (req,res)=>{
+router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
+
+async function saveSpend(req,res,next){
   const {name, description, category, amount, assetId, payed} = req.body
   const date = new Date (req.body.date)
   if(
@@ -75,41 +79,40 @@ router.post('/', async (req,res)=>{
     payed == undefined ||
     date == undefined
     ){
-    res.status(500).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
-    return
+    return res.status(500).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
   }
   const spendData = new spend ({
-    _id : mongoose.Types.ObjectId(),
     name : name,
     description : description,
     category : category,
     amount : amount,
     date : date,
     payed : payed,
-    assetId : mongoose.Types.ObjectId(assetId)
+    asset : mongoose.Types.ObjectId(assetId)
   })
-
-  const currentAsset = await asset.findById(assetId)
   try{
     await spendData.save()
-    if(payed){
-      const updatedAsset = await asset.findOneAndUpdate(
-        {id:assetId},
-        {realEarnings : currentAsset.realEarnings - amount}, 
-        {new : true})
-      if(updatedAsset.realEarnings<0){
-        await asset.findOneAndUpdate({id : assetId},
-          {investmentRecoveryProgress : 100-(((updatedAsset.realEarnings*100)*-1)/currentAsset.assetCost)})      
-      }
-    }else{
-      await asset.findOneAndUpdate(
-        {id : assetId},
-        {earnings : currentAsset.earnings - amount})
-    }
-    res.json(responseObject(null,true,"Informacion actualizada correctamente"))
-  }catch(e){
-      res.json(responseObject(e, false, "Error al realizar la consulta. Revisa tus parametros."))
+    res.data = spendData
+    next()
+  }catch(error){
+    return res.status(500).json(responseObject(error,false,"Ha ocurrido un error"))
   }
-})
+}
+
+async function updateAsset(req,res,next){
+  const asset = res.asset
+  const spend = res.data
+  try{
+    if(spend.payed){
+      asset.realEarnings -= spend.amount
+    }else{
+      asset.earnings -= spend.amount
+    }
+    await asset.save()
+    next()
+  }catch(error){
+    return res.status(500).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
+  }
+}
 
 module.exports = router

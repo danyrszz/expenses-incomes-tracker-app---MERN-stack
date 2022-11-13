@@ -13,7 +13,7 @@ router.get('/', async (req,res)=>{
 })
 
 //save a new bill
-router.post('/', saveBill, getAsset, updateAsset, updateRecoveryProgress)
+router.post("/", saveBill, getAsset, updateAsset, updateRecoveryProgress)
 
 //update an existent bill
 router.put("/:id/", getBill, getAsset, updateBill, updateRecoveryProgress)
@@ -28,7 +28,7 @@ async function saveBill(req,res,next){
     date == undefined ||
     assetId == undefined 
     ){
-    return res.status(500).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
+    return res.status(400).json(responseObject(null, false, "Error al guardar. Revisa tus parametros."))
   }
   const currentBill = new bill({
     _id : mongoose.Types.ObjectId(),
@@ -41,7 +41,7 @@ async function saveBill(req,res,next){
     res.currentBill = currentBill
     next()
   }catch(error){
-    res.json(responseObject(error,false,"Ha ocurrido un error"))
+    res.status(500).json(responseObject(error,false,"Ha ocurrido un error"))
   }
 }
 //after inserting a new bill
@@ -89,7 +89,7 @@ async function updateBill(req,res,next){
     res.asset.earnings -= res.currentBill.amount
     await res.asset.save() 
   }catch(error){
-    return res.json("error al intentar actualizar el activo")
+    return res.status(400).json("error al intentar actualizar el activo")
   }
   const {date,amount} = req.body
   if(amount) res.currentBill.amount = amount
@@ -102,7 +102,7 @@ async function updateBill(req,res,next){
     await res.asset.save()
     next()
   }catch(error){
-    return res.json(responseObject(error,false,"ha ocurrido un error al actualizar la informacion"))
+    return res.status(500).json(responseObject(error,false,"ha ocurrido un error al actualizar la informacion"))
   }
 }
 
@@ -132,7 +132,7 @@ async function deleteBill(req,res,next){
     await asset.save()
     next()
   }catch(error){
-    return res.json(responseObject(error,false,"no se ha podido eliminar"))
+    return res.status(500).json(responseObject(error,false,"no se ha podido eliminar"))
   }
 }
 
