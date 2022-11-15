@@ -5,14 +5,17 @@ const responseObject = require('../utils/utils')
 const {getAsset, updateRecoveryProgress} = require('./common')
 
 const spend = require('../models/spends')
-const asset = require('../models/assets')
 
 mongoose.connect('mongodb://127.0.0.1:27017/taxi') 
 
 //get all of the spends
 router.get('/', async (req,res,next)=>{
   if(req.query.order===undefined){
-    res.json ( await spend.find({}).populate('asset','name -_id'))
+    try{
+      res.json ( await spend.find({}).populate('asset','name -_id'))
+    }catch(error){
+      res.status(400).json(responseObject(error,false,"Error obteniendo todos los gastos"))
+    }
   }else{
     next()
   }
@@ -20,8 +23,12 @@ router.get('/', async (req,res,next)=>{
 
 //sort all spends by amount 
 router.get('/', async(req,res)=>{
-  const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
-  res.json(spends)
+  try {
+    const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
+    res.json(spends)    
+  } catch (error) {
+    res.status(400).json(responseObject(error,false,"Error al filtrar los gastos por cantidad"))
+  }
 })
 
 //get spends filtered by category
@@ -29,7 +36,7 @@ router.get('/category/:category', async (req,res,next)=>{
   try{
     res.json( await spend.find({category : req.params.category}).populate('asset', 'name -_id'))
   }catch(error){
-    res.status(400).json(responseObject(error,false,"ha ocurrido un error"))
+    res.status(400).json(responseObject(error,false,"ha ocurrido un error al obtener los gastos por categoria"))
   }
 })
 
@@ -37,9 +44,12 @@ router.get('/category/:category', async (req,res,next)=>{
 router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
   const min = req.params.min
   const max = req.params.max
-  const spends = await spend.find({amount:{$gte:min, $lte:max}}).populate('asset')
-  console.log(req.query.sort)
-  res.json(spends)
+  try {
+    const spends = await spend.find({amount:{$gte:min, $lte:max}}).populate('asset', 'name -_id')
+    res.json(spends)    
+  } catch (error) {
+    res.status(400).json(responseObject(error,false,"Error obteniendo los gastos filtrados por cantidad"))
+  }
 })
 
 //filter the spends starting from the provided date
@@ -48,21 +58,21 @@ router.get('/startingfromdate/:date', async (req,res) => {
     const spends = await spend.find({date: {$gte: new Date(req.params.date)}}).populate('asset')
     res.json(spends)
   }catch(error){
-    res.status(400).json(responseObject(error, false, "Error al realizar la consulta. Revisa tus parametros."))
+    res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por fecha"))
   }
 })
 
 //get all of the spends ordered by date 
 router.get('/betweendates/:date1/:date2', async (req,res)=>{
   try{
-    const spends = await 
-    spend.find(
+    const spends = 
+    await spend.find(
       {date: { $gte : new Date(req.params.date1) , $lte: new Date(req.params.date2) } }
     )
     .populate('asset')
     res.json(spends)
   } catch(error) {
-    res.status(400).json(responseObject(error, false, "Error al realizar la consulta. Revisa tus parametros."))
+    res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por rango de fechas"))
   }
 })
 

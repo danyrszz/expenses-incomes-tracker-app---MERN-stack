@@ -14,7 +14,6 @@ async function getAsset(req,res,next){
   }
 }
 
-
 async function updateRecoveryProgress(req,res){
   const asset = res.asset
   try{
