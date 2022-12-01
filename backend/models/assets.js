@@ -10,7 +10,8 @@ const assetSchema = new Schema({
   investmentRecoveryDate : Date,
   totalIncomes : Number,
   investmentRecoveryProgress : Number,
-  purchaseDate : Date
+  purchaseDate : Date,
+  type : String
 })
 
 const Asset = mongoose.model('Asset', assetSchema)

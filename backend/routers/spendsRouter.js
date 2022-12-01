@@ -9,27 +9,25 @@ const spend = require('../models/spends')
 mongoose.connect('mongodb://127.0.0.1:27017/taxi') 
 
 //get all of the spends
+//AGREGAR PAGINATION PENDIENTE
 router.get('/', async (req,res,next)=>{
-  if(req.query.order===undefined){
-    try{
-      res.json ( await spend.find({}).populate('asset','name -_id'))
-    }catch(error){
-      res.status(400).json(responseObject(error,false,"Error obteniendo todos los gastos"))
-    }
-  }else{
-    next()
+console.log(req.query)
+  try{
+    res.json ( await spend.find({}).populate('asset','name -_id'))
+  }catch(error){
+    res.status(400).json(responseObject(error,false,"Error obteniendo todos los gastos"))
   }
 })
 
 //sort all spends by amount 
-router.get('/', async(req,res)=>{
-  try {
-    const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
-    res.json(spends)    
-  } catch (error) {
-    res.status(400).json(responseObject(error,false,"Error al filtrar los gastos por cantidad"))
-  }
-})
+// router.get('/', async(req,res)=>{
+//   try {
+//     const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
+//     res.json(spends)    
+//   } catch (error) {
+//     res.status(400).json(responseObject(error,false,"Error al filtrar los gastos por cantidad"))
+//   }
+// })
 
 //get spends filtered by category
 router.get('/category/:category', async (req,res,next)=>{
@@ -55,7 +53,7 @@ router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
 //filter the spends starting from the provided date
 router.get('/startingfromdate/:date', async (req,res) => {
   try{
-    const spends = await spend.find({date: {$gte: new Date(req.params.date)}}).populate('asset')
+    const spends = await spend.find({date: {$gte: new Date(req.params.date)}}).populate('asset', 'name -_id')
     res.json(spends)
   }catch(error){
     res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por fecha"))
@@ -75,6 +73,30 @@ router.get('/betweendates/:date1/:date2', async (req,res)=>{
     res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por rango de fechas"))
   }
 })
+
+//get all the spends by one or more filter
+router.get('/filter/', async (req,res)=>{
+  const pipeline = []
+  const {category, amount, date} = req.query
+  if(category!=undefined) {
+    pipeline.push({ $match: { category: category } })
+  }
+  if(amount!=undefined){
+    const qty = parseInt(amount)
+    pipeline.push({ $match: { amount: {$gte : qty} } })
+  }
+  if(date!=undefined){
+    const dte = new Date (date)
+    pipeline.push({ $match: { date: {$gte : dte} } })
+  }
+  const spends = []
+  const results = spend.aggregate(pipeline)
+  for await (const result of results) {
+      spends.push(result)
+  }
+  res.json(spends)
+})
+
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
 
