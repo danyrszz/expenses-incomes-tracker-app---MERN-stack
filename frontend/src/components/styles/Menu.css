@@ -1,0 +1,63 @@
+button{
+  border: none;
+  background: rgba(0, 0, 0, 0);
+  color: var(--whiteText);
+  cursor: pointer;
+  padding: 5px;
+  padding-left: 20px;
+}
+.icon{
+  font-size: 35px;
+}
+.menu{
+  position: absolute;
+  color: var(--whiteText);
+  background: var(--darkPurple);
+  top:var(--headerHeight);
+}
+.open{
+  transform: translateX(0%);
+  transition: 0.4s;
+}
+.closed{
+  transform: translateX(-250px);
+  transition: 0.4s;
+}
+.menu-element{
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  background: var(--darkPurple);
+}
+.submenu{
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
+  width: 100%;
+  background: var(--lightPurple);
+}
+.submenu-open{
+  visibility: visible;
+  transform: translateY(100%);
+  transition: all 0.3s;
+}
+.submenu-closed{
+  visibility: hidden;
+  transform: translateY(0%);
+  z-index: 1;
+  transition: all 0.3s;
+}
+.menu-element span{
+  padding: 5px;
+}
+.menu ul{
+  list-style: none;
+}
+.menu ul li{
+  padding: 10px 20px;
+}
+.menu ul li:hover{
+  background: var(--lightPurple);
+  cursor: pointer;
+}

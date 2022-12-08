@@ -1,0 +1,14 @@
+.header{
+  font-size: 20px;
+  --headerHeight : 80px;
+  background: linear-gradient(
+    var(--lightPurple),
+    var(--darkPurple)
+  );
+  width: 100%;
+  height:var(--headerHeight);
+  display: flex;
+  align-items: center;
+  color: var(--whiteText);
+  box-shadow: 0px 5px 20px 0px #888888;
+}
