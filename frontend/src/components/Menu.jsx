@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './styles/Menu.css'
 
-export default function Menu () {
+export default function Menu ({menu}) {
 
+  console.log(menu)
   const [menuShown, setMenuShown] = useState(false)
   const [historyShown, setHistoryShown] = useState(false)
 

@@ -4,11 +4,15 @@
   padding: 0;
   font-family: 'Rubik', sans-serif;
 }
-
+.content{
+  display: flex;
+}
 body{
   --darkPurple: #7F669D;
   --lightPurple : #BA94D1;
   --pinky : #DEBACE;
   --creamy : #FBFACD;
   --whiteText : #fff;
+  --background : #E1E1E1;
+  background: var(--background);
 }
