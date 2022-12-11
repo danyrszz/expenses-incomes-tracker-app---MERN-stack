@@ -1,60 +1,76 @@
 import { useState } from 'react'
+import { useRef } from 'react'
 import './styles/Menu.css'
 
 export default function Menu ({menu}) {
-
-  console.log(menu)
-  const [menuShown, setMenuShown] = useState(false)
-  const [historyShown, setHistoryShown] = useState(false)
+  const [menuShown, setMenuShown] = useState(true)
 
   function showMenu(){
     setMenuShown(!menuShown)
-    setHistoryShown(false)
   }
   
   return(
     <div className='container'>
       <button onClick={showMenu}>
-        <span class="material-symbols-outlined icon">
+        <span className="material-symbols-outlined icon">
         menu
         </span>
       </button>
-      
-      <div className={'menu '+ (menuShown?'open':'closed')}>
+
+      <div className={"menu-wrapper " +(menuShown?'menu-wrapper-opened':'menu-wrapper-closed')} >
+        <div className='themenu'>
           <ul>
-
-            <li className='menu-element'>
-              <span class="material-symbols-outlined">info</span>
-              <span>Activo</span>
-            </li>
-
-            <li className='menu-element'>
-              <span class="material-symbols-outlined">add</span>
-              <span>Agregar Cuenta</span>
-            </li>
-
-            <li className='menu-element'>
-              <span class="material-symbols-outlined">attach_money</span>
-              <span>Agregar Gasto</span>
-            </li>
-
-            <li className='menu-element' onClick={()=>setHistoryShown(!historyShown)}>
-              <span class="material-symbols-outlined">history</span>
-              <span>Historial</span>
-              <span class="material-symbols-outlined">arrow_drop_down</span>
-            </li>
-            <ul className={'submenu '+(historyShown?'submenu-open':'submenu-closed')}>
-              <li className='menu-element'>
-                <span class="material-symbols-outlined">add</span>
-                <span>Cuentas</span>
-              </li>
-              <li className='menu-element'>
-                <span class="material-symbols-outlined">remove</span>
-                <span>Gastos</span>
-              </li>
-            </ul>
-
+            {
+              menu.map((element,i)=>{
+                if(element.submenu === null){
+                  return(
+                    <a href={element.link}>
+                      <li className='single-element'>
+                        <div className="element-container">
+                          <span class="material-symbols-outlined">{element.icon}</span>
+                          <span>{element.title}</span>
+                        </div>
+                      </li>
+                    </a>
+                  )
+                }else{
+                  i = useRef()
+                  return(
+                    <li className='submenu-parent' ref={i} onClick={()=>{
+                      if(i.current.children[1].className == "submenu submenu-closed"){
+                        i.current.children[1].className = "submenu submenu-open"
+                        return
+                      }
+                      if(i.current.children[1].className == "submenu submenu-open"){
+                        i.current.children[1].className = "submenu submenu-closed"
+                        return
+                      }
+                    }}>
+                      <div className="element-container">
+                        <span class="material-symbols-outlined">{element.icon}</span>
+                        <span>{element.title}</span>           
+                      </div>
+                      <ul className='submenu submenu-closed'>
+                        {element.submenu.map((element,i)=>{
+                          return(
+                            <li>
+                            <div className="element-container">
+                              <span class="material-symbols-outlined">{element.icon}</span>
+                              <span>{element.title}</span>
+                            </div>
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    </li>
+                  )
+                }
+              })
+            }
           </ul>
+        </div>
+        <div className="rest" onClick={showMenu}>
+        </div>
       </div>
     </div>
   )
