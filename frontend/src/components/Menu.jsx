@@ -3,14 +3,14 @@ import { useRef } from 'react'
 import './styles/Menu.css'
 
 export default function Menu ({menu}) {
-  const [menuShown, setMenuShown] = useState(true)
+  const [menuShown, setMenuShown] = useState(false)
 
   function showMenu(){
     setMenuShown(!menuShown)
   }
   
   return(
-    <div className='container'>
+    <div className='button-container'>
       <button onClick={showMenu}>
         <span className="material-symbols-outlined icon">
         menu
@@ -24,7 +24,7 @@ export default function Menu ({menu}) {
               menu.map((element,i)=>{
                 if(element.submenu === null){
                   return(
-                    <a href={element.link}>
+                    <a href={element.link} key={element.title}>
                       <li className='single-element'>
                         <div className="element-container">
                           <span class="material-symbols-outlined">{element.icon}</span>
@@ -45,7 +45,7 @@ export default function Menu ({menu}) {
                         i.current.children[1].className = "submenu submenu-closed"
                         return
                       }
-                    }}>
+                    }} key={element.title}>
                       <div className="element-container">
                         <span class="material-symbols-outlined">{element.icon}</span>
                         <span>{element.title}</span>           
@@ -53,7 +53,7 @@ export default function Menu ({menu}) {
                       <ul className='submenu submenu-closed'>
                         {element.submenu.map((element,i)=>{
                           return(
-                            <li>
+                            <li key={element.title}>
                             <div className="element-container">
                               <span class="material-symbols-outlined">{element.icon}</span>
                               <span>{element.title}</span>

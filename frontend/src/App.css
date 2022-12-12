@@ -14,6 +14,29 @@ body{
   --pinky : #DEBACE;
   --creamy : #FBFACD;
   --whiteText : #fff;
+  --greyText : #979797;
   --background : #E1E1E1;
+  --green : #119937;
+  --red : #DF2929;
   background: var(--background);
+}
+
+/* card common styles */
+.card{
+  background-color: var(--whiteText);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 1px 1px 5px -2px #888888;
+}
+.card p{
+  font-size: 25px;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.flex-row{
+  display: flex;
+  align-items: center;
 }

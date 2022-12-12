@@ -1,0 +1,43 @@
+.card-block-container{
+  padding: 15px 40px;
+}
+.card-amount-label{
+  color:var(--green);
+  font-size: 3rem;
+}
+.card-date-label{
+  padding-top: 5px;
+  color: var(--greyText);
+}
+.card-button-container{
+  width: 9em;
+  display: flex;
+  justify-content: space-between;
+}
+.card-button{
+  border-radius: 0px;
+  border: 2.5px solid;
+  padding: 5px;
+  background-color: #fff;
+  cursor: pointer;
+}
+.card-button span{
+  display: flex;
+  font-size: 2.6em;
+}
+.card-button:hover{
+  color: #fff;
+  transition: 0.4s;
+}
+.edit-button{
+  color: var(--darkPurple);
+}
+.edit-button:hover{
+  background-color: var(--darkPurple);
+}
+.delete-button{
+  color: var(--red);
+}
+.delete-button:hover{
+  background-color: var(--red);
+}
