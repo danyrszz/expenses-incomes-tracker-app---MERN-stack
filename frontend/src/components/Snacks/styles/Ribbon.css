@@ -1,0 +1,16 @@
+.ribbon{
+  color: white;
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.ribbon-yes{
+  background-color: var(--green);
+}
+.ribbon-no{
+  background-color: var(--red);
+}
+.ribbon span{
+  padding: 0 10px;
+}

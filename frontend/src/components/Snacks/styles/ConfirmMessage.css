@@ -1,0 +1,34 @@
+.confirm-message{
+}
+.confirm-message p{
+  font-size: 1.2em;
+  padding: 20px 0;
+}
+.confirm-msg-btn-wrapper{
+  padding: 10px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.confirm-msg-button{
+  width: 5.5em;
+  font-size: 1.2em;
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  transition: 0.4s;
+}
+.confirm-msg-btn-yes{
+  background-color: var(--green);
+}
+.confirm-msg-btn-no{
+  background-color: var(--red);
+}
+.confirm-msg-btn-yes:hover{
+  background-color: var(--green-darker);
+}
+.confirm-msg-btn-no:hover{
+  background-color: var(--red-darker);
+}

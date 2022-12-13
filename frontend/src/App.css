@@ -17,7 +17,9 @@ body{
   --greyText : #979797;
   --background : #E1E1E1;
   --green : #119937;
+  --green-darker : #0e832f;
   --red : #DF2929;
+  --red-darker: #c22525;
   background: var(--background);
 }
 
@@ -31,6 +33,15 @@ body{
 .card p{
   font-size: 25px;
 }
+.modal-container{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background-color:rgba(0, 0, 0, 0.5);
+  outline: 1px solid red;
+}
 .flex-column{
   display: flex;
   flex-direction: column;
@@ -39,4 +50,9 @@ body{
 .flex-row{
   display: flex;
   align-items: center;
+}
+.flex-centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
