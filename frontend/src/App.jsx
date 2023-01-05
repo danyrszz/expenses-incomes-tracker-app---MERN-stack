@@ -1,24 +1,26 @@
 import './App.css'
 import HeaderBar from './components/HeaderBar'
-import AssetCard from './components/Asset/AssetCard'
 import BillCard from './components/Bills/BillCard'
+import Asset from './pages/Asset'
+import Error from './components/error/Error'
+import AddSpend from './pages/AddSpend'
+import Bills from './pages/Bills'
 
 function App() {
+
+
   return (
     <div className="App">
       <HeaderBar/>
-      <div className="content">
-        {/* <AssetCard>
-          <p>Chevrolet Matiz 2015</p>
-          <div className="details">
-            
-          </div>
-        </AssetCard> */}
-        <BillCard
-          amount = {1500}
-          date = '2022-10-28T00:00:00.000+00:00'
-        />
-      </div>
+
+      {/* <Error>
+        <Asset></Asset>
+      </Error> */}
+
+      {/* <AddSpend></AddSpend> */}
+    
+      <Bills></Bills>
+      
     </div>
   )
 }

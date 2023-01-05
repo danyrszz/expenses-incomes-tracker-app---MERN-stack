@@ -2,13 +2,14 @@ import './BillCard.css'
 import { useState } from 'react'
 import ConfirmMessage from '../Snacks/ConfirmMessage'
 import Ribbon from '../Snacks/Ribbon'
+import { getFormattedDate } from '../../utils/date'
 
 export default function BillCard({amount,date}){
   const [showConfirmMessage, setShowConfirmMessage] = useState(false)
-
-  const d = new Date(date)
-  d.setMinutes(d.getMinutes() + d.getTimezoneOffset())
-  console.log(d.getDate())
+  const [showRibbon, setShowRibbon] = useState(false)
+  const ribbonDuration = 3000
+  
+  const formattedDate = getFormattedDate(date)
 
   function handleEdit(){
     console.log("edit")
@@ -16,30 +17,38 @@ export default function BillCard({amount,date}){
 
   function handleDelete(response){
     if(response){
+      setShowConfirmMessage(false)
       console.log("deleted")
       //...CODE TO HANDLE DELETE FROM DATABASE
-      setShowConfirmMessage(false)
+      setShowRibbon(true)
     }else{
       console.log("usuario ha cancelado eliminacion")
       setShowConfirmMessage(false)
     }
   }
-  
+
+  const successMessage = (
+    <Ribbon success={true} visible={showRibbon} onClose={()=>setShowRibbon(false)} duration={ribbonDuration}>
+      <p>Se ha eliminado con éxito.</p>
+    </Ribbon>
+  )
+  const failMessage = (
+    <Ribbon success={false} visible={showRibbon} onClose={()=>setShowRibbon(false)} duration={ribbonDuration}>
+      <p>No se ha podido eliminar.</p>
+    </Ribbon>
+  )
+
   return(
-    <div className="card flex-column">
-      {showConfirmMessage ? (
-        <ConfirmMessage handleConfirmation={(response)=>handleDelete(response)}>
-          <p>¿Seguro que quieres eliminar?</p>
-        </ConfirmMessage>
-        ):null}
-      <Ribbon ok={true}>
-        <p>Informacion actualizada correctamente</p>
-      </Ribbon>
+    <div className="card billcard-wrapper">
+      <ConfirmMessage handleConfirmation={(response)=>handleDelete(response)} visible={showConfirmMessage}>
+        <p>¿Seguro que quieres eliminar?</p>
+      </ConfirmMessage>
+      {successMessage}
       <div className="flex-column card-block-container">
-        <span className='card-amount-label'>$1500</span>
-        <span className='card-date-label'>10 diciembre 2022</span>
+        <span className='card-amount-label'>${amount}</span>
+        <span className='card-date-label'>{formattedDate}</span>
       </div>
-      <div className="flex-row card-button-container">
+      <div className="card-button-container">
         <button className="card-button edit-button" onClick={handleEdit}>
           <span class="material-symbols-outlined">
             edit

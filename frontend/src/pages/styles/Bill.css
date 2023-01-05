@@ -1,0 +1,48 @@
+.bill-section .select{
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: var(--darkerPurple);
+  color: var(--pinky);
+  font-weight: 600;
+  box-shadow: 1px 1px 5px -2px #888888;
+  transition: all 250ms;
+  margin: 15px;
+}
+.bills-container{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(5,260px);
+  /* width: 100vw; */
+}
+.bills-container > *{
+  margin: 10px;
+}
+.select:hover{
+  box-shadow: 1px 1px 20px -2px #888888;
+}
+.select:focus{
+  outline: none;
+}
+
+@media screen and (max-width:1250px) {
+  .bills-container{
+    grid-template-columns: repeat(4,1fr);
+  }  
+}
+@media screen and (max-width:1050px) {
+  .bills-container{
+    grid-template-columns: repeat(3,1fr);
+  }  
+}
+@media screen and (max-width:810px) {
+  .bills-container{
+    grid-template-columns: repeat(2,1fr);
+  }  
+}
+@media screen and (max-width:510px) {
+  .bills-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  
+}

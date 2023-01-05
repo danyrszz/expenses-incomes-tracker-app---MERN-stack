@@ -1,4 +1,17 @@
-.confirm-message{
+.confirm-msg-wrapper{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background:rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+.confirm-msg-wrapper-opened{
+  visibility: visible;
+}
+.confirm-msg-wrapper-closed{
+  visibility: hidden;
 }
 .confirm-message p{
   font-size: 1.2em;
@@ -18,7 +31,6 @@
   border-radius: 20px;
   border: none;
   color: white;
-  transition: 0.4s;
 }
 .confirm-msg-btn-yes{
   background-color: var(--green);

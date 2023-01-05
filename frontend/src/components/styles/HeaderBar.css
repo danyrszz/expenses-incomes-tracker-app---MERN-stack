@@ -5,7 +5,6 @@
     var(--lightPurple),
     var(--darkPurple)
   );
-  width: 100%;
   height:var(--headerHeight);
   display: flex;
   align-items: center;

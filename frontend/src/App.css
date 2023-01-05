@@ -2,11 +2,9 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
-.content{
-  display: flex;
-}
+
 body{
   --darkerPurple :#735d8e;
   --darkPurple: #7F669D;
@@ -30,18 +28,6 @@ body{
   padding: 1rem;
   box-shadow: 1px 1px 5px -2px #888888;
 }
-.card p{
-  font-size: 25px;
-}
-.modal-container{
-  position:absolute;
-  top:0;
-  left:0;
-  width: 100vw;
-  height: 100vh;
-  background-color:rgba(0, 0, 0, 0.5);
-  outline: 1px solid red;
-}
 .flex-column{
   display: flex;
   flex-direction: column;
@@ -55,4 +41,15 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
 }

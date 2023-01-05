@@ -1,9 +1,9 @@
 import './styles/ConfirmMessage.css'
 
-export default function ConfirmMessage({handleConfirmation, children}){
-  
-  return(
-    <div className="modal-container flex-centered">
+export default function ConfirmMessage({handleConfirmation, children, visible}){
+
+  return (
+    <div className={`confirm-msg-wrapper flex-centered ${visible?'confirm-msg-wrapper-opened':'confirm-msg-wrapper-closed'}`}>
       <div className="confirm-message flex-column card">
         {children}
         <div className="confirm-msg-btn-wrapper">

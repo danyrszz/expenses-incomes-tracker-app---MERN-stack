@@ -1,0 +1,8 @@
+.no-data{
+  width: 100%;
+  height: 500px;
+}
+.no-data p{
+  font-size: 2rem;
+  font-weight: 600;
+}

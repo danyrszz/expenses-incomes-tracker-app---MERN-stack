@@ -1,5 +1,5 @@
-.card-block-container{
-  padding: 15px 40px;
+.billcard-wrapper{
+ max-width: 260px;
 }
 .card-amount-label{
   color:var(--green);
@@ -10,9 +10,9 @@
   color: var(--greyText);
 }
 .card-button-container{
-  width: 9em;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: 10px;
 }
 .card-button{
   border-radius: 0px;
@@ -20,6 +20,7 @@
   padding: 5px;
   background-color: #fff;
   cursor: pointer;
+  box-shadow: 1px 1px 10px -2px #888888;
 }
 .card-button span{
   display: flex;
@@ -31,12 +32,14 @@
 }
 .edit-button{
   color: var(--darkPurple);
+  border: 2.5px solid var(--darkPurple);
 }
 .edit-button:hover{
   background-color: var(--darkPurple);
 }
 .delete-button{
   color: var(--red);
+  border: 2.5px solid var(--red);
 }
 .delete-button:hover{
   background-color: var(--red);
