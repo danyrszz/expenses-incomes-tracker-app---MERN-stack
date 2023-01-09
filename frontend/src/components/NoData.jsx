@@ -1,8 +1,8 @@
 import './styles/NoData.css'
-export default function NoData(){
+export default function NoData({children}){
   return (
       <div className="no-data flex-centered">
-        <p>No hay datos</p>
+        {children}
       </div>
   )
 }

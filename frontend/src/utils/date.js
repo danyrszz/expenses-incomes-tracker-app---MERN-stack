@@ -35,39 +35,8 @@ export function getCurrentDate (){
     }
 }
 
-// export function getDates (){
-//     const now = new Date()
-//     const month = now.getMonth()+1
-//     const year = now.getFullYear()
-//     const lastDay = (new Date (year,month,0)).getDate
-//     return {
-//         startingDate : {
-//             day : 1,
-//             month : month,
-//             year : year
-//         },
-//         endingDate : {
-//             day : lastDay,
-//             month : month,
-//             year : year
-//         }
-//     }
-// }
-
 export function getDates (month, year){
     const date = new Date(year,month,0)
-    // return {
-    //     startingDate : {
-    //         day : 1,
-    //         month : date.getMonth()+1,
-    //         year : date.getFullYear()
-    //     },
-    //     endingDate : {
-    //         day : date.getDate(),
-    //         month : date.getMonth()+1,
-    //         year : date.getFullYear()
-    //     }
-    // }
     return {
         startingDate : `${date.getFullYear()}-${date.getMonth()+1}-01` ,
         endingDate : `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`

@@ -1,5 +1,6 @@
 .ribbon{
   position: absolute;
+  width: 100%;
   color: white;
   padding: 20px;
   top:-100px;
