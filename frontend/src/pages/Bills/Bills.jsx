@@ -7,7 +7,7 @@ import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
 import NoData from '../../components/NoData'
 import './Bill.css'
 import useToggle from '../../utils/UseToggle'
-import useFetch from '../../utils/useFetch'
+import useGetBills from './useGetBills'
 
 export default function Bills(){
 
@@ -16,7 +16,7 @@ export default function Bills(){
   const [currentMonth, setCurrentMonth] = useState(getCurrentDate().month)
   const [currentYear, setCurrentYear] = useState(getCurrentDate().year)
   const [dates, setDates] = useState (getDates(currentMonth,currentYear))
-  const [data, setData] = useState([])
+  const [data] = useGetBills(dates.startingDate,dates.endingDate)
 
   //states to handle delete and edit
   const [showRibbon, setShowRibbon] = useToggle()
@@ -54,21 +54,6 @@ export default function Bills(){
   useEffect(()=>{
     setDates(getDates(currentMonth,currentYear))
   },[currentMonth, currentYear])
-
-  //fetch the data when the date is changed
-  useEffect(()=>{
-    getData()
-  },[dates])
-  
-  async function getData () {
-    try{
-      const data = await fetch(endpoints.bills.betweenDates(dates.startingDate, dates.endingDate))
-      const res = await data.json()
-      setData(res)
-    }catch(e){
-      console.log(e)
-    }
-  }
   
   //UI components
   const successMessage = (
