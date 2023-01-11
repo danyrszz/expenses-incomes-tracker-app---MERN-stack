@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { allYears, getCurrentDate, getDates } from '../utils/date'
-import {endpoints} from '../utils/endpoints'
-import BillCard from '../components/Bills/BillCard'
-import Ribbon from '../components/Snacks/Ribbon'
-import ConfirmMessage from '../components/Snacks/ConfirmMessage'
-import NoData from '../components/NoData'
-import './styles/Bill.css'
+import { allYears, getCurrentDate, getDates } from '../../utils/date'
+import {endpoints} from '../../utils/endpoints'
+import BillCard from '../../components/Bills/BillCard'
+import Ribbon from '../../components/Snacks/Ribbon'
+import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
+import NoData from '../../components/NoData'
+import './Bill.css'
 
 export default function Bills(){
 
