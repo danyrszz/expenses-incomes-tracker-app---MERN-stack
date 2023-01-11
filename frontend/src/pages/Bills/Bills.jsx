@@ -6,6 +6,8 @@ import Ribbon from '../../components/Snacks/Ribbon'
 import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
 import NoData from '../../components/NoData'
 import './Bill.css'
+import useToggle from '../../utils/UseToggle'
+import useFetch from '../../utils/useFetch'
 
 export default function Bills(){
 
@@ -17,10 +19,11 @@ export default function Bills(){
   const [data, setData] = useState([])
 
   //states to handle delete and edit
-  const [showRibbon, setShowRibbon] = useState(false)
-  const [showConfirmMessage, setShowConfirmMessage] = useState(false)
+  const [showRibbon, setShowRibbon] = useToggle()
+  const [showConfirmMessage, setShowConfirmMessage] = useToggle()
   const [selectedBill, setSelectedBill] = useState('')
   const [isDeleted, setIsDeleted] = useState(false)
+
   const ribbonDuration = 3000
 
   //selects the bill and updates the state with the current bill
@@ -33,13 +36,12 @@ export default function Bills(){
   const handleDeleteConfirmation = (itsConfirmed)=>{
     if(itsConfirmed){
       setShowConfirmMessage(false)
-      setSelectedBill('')
       setShowRibbon(true)
       deleteBill(selectedBill)
     }else{
-      setSelectedBill('')
       setShowConfirmMessage(false)
     }
+    setSelectedBill('')
   }
 
   async function deleteBill(id){
