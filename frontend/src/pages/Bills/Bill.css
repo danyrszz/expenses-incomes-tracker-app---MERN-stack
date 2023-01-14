@@ -22,6 +22,11 @@
 .select:focus{
   outline: none;
 }
+.sum-title{
+  text-align: center;
+  padding: 10px 0;
+  font-size: 2em;
+}
 
 @media screen and (max-width:1250px) {
   .bills-container{

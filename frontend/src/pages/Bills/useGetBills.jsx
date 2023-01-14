@@ -1,17 +1,26 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { endpoints } from "../../utils/endpoints";
 import { fetchData } from "../../utils/fetch";
 
-export default function useGetBills(startingDate, endingDate){
+export default function useGetBills(startingDate, endingDate, selectedBill){
 
   const [bills, setBills] = useState([])
-  const url = endpoints.bills.betweenDates(startingDate,endingDate)
-
+  const [isDeleted, setIsDeleted] = useState(false)
+  const fetchUrl = endpoints.bills.betweenDates(startingDate,endingDate)
+  const deleteUrl = endpoints.bills.delete(selectedBill)
+  
+  //fetch data when the date changes
   useEffect(()=>{
-    fetchData(url,'get')
+    fetchData(fetchUrl,'get')
     .then(res => setBills(res))
   }, [startingDate, endingDate])
+  
+  async function deleteBill(){
+    const res = await fetchData(deleteUrl,'delete')
+    res.ok ? setIsDeleted(true) : setIsDeleted(false)
+    const data = await fetchData(fetchUrl,'get')
+    setBills(data)
+  }
 
-  return [bills]
+  return [bills, deleteBill, isDeleted]
 }

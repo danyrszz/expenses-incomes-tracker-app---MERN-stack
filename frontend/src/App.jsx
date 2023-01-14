@@ -1,6 +1,6 @@
 import './App.css'
 import HeaderBar from './components/HeaderBar'
-import BillCard from './components/Bills/BillCard'
+import BillCard from './pages/Bills/components/BillCard'
 import Asset from './pages/Asset'
 import Error from './components/error/Error'
 import AddSpend from './pages/AddSpend'

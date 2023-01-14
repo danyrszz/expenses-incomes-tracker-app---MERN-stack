@@ -1,7 +1,7 @@
 import './BillCard.css'
-import { getFormattedDate } from '../../utils/date'
+import { getFormattedDate } from '../../../utils/date'
 
-export default function BillCard({ amount, date, selectBillToDelete}){
+export default function BillCard({ amount, date, handleDelete}){
 
   const formattedDate = getFormattedDate(date)
 
@@ -22,7 +22,7 @@ export default function BillCard({ amount, date, selectBillToDelete}){
             edit
           </span>        
         </button>
-        <button className="card-button delete-button" onClick={selectBillToDelete}>
+        <button className="card-button delete-button" onClick={handleDelete}>
           <span class="material-symbols-outlined">
             delete
           </span>
