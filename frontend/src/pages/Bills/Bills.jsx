@@ -84,21 +84,22 @@ export default function Bills(){
       Total: ${data.reduce( (current, e)=> current + e.amount, 0)}
       </p>
       {
-        //prints the bills or no data
-        data.length>0 ? (
-          <div className="bills-container">
-            {data.map( e=> {
-              return  <BillCard
-              amount = {e.amount}
-              key = {e._id}
-              date = {e.date}
-              handleDelete = {()=>{
-                window.scroll(0,0)
-                setShowConfirmMessage(true)
-                setSelectedBill(e._id)
-                }}
-              />
-            })}
+      //prints the bills or no data
+      data.length>0 ? (
+        <div className="bills-container">
+          {data.map( e=> {
+            return ( 
+              <BillCard
+                amount = {e.amount}
+                key = {e._id}
+                date = {e.date}
+                handleDelete = {()=>{
+                  window.scroll(0,0)
+                  setShowConfirmMessage(true)
+                  setSelectedBill(e._id)
+                  }}
+              />)
+          })}
           </div>
         ) : (
           <NoData>

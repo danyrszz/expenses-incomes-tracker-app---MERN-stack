@@ -13,6 +13,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   overflow: hidden;
+  margin-top: 10px;
 }
 .red-tag{
   color: var(--red);

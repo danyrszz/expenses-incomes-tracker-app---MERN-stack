@@ -1,38 +1,13 @@
-import MCAR from '../assets/MCAR.png'
-import ProgressBar from '../components/ProgressBar'
-import Loading from '../components/Loading'
-import './styles/Asset.css'
 import { useEffect, useState } from 'react'
-import { getFormattedDate } from '../utils/date'
+import useGetAssets from './useGetAssets'
+import MCAR from '../../assets/MCAR.png'
+import ProgressBar from '../../components/ProgressBar'
+import Loading from '../../components/Loading'
+import './Asset.css'
+import { getFormattedDate } from '../../utils/date'
 export default function Asset () {
 
-  const [data, setData] = useState({loading:true})
-
-  useEffect(()=>{
-    async function getData () {
-      try{
-        const data = await fetch('http://localhost:3000/assets')
-        const res = await data.json()
-        setData({
-          name: res[0].name,
-          cost: res[0].assetCost,
-          type: res[0].type,
-          date: res[0].purchaseDate,
-          incomes: res[0].totalIncomes,
-          earnings: res[0].realEarnings,
-          progress: res[0].investmentRecoveryProgress,
-          loading: false
-        })
-      }catch(e){
-        setData({
-          error: "error",
-          loading: true
-        })
-      }
-    }
-    getData()
-  },[])
-
+  const [data] = useGetAssets()
   const assetPage =
   (
   <div className="content">
@@ -56,7 +31,7 @@ export default function Asset () {
               <span>Ingresos</span> <span className="big-tag">${data.incomes}</span>
             </div>
             <div className="info-tag">
-              <span>Inversión</span> <span className="big-tag">${data.earnings}</span>
+              <span>Ganancias</span> <span className="big-tag">${data.earnings}</span>
             </div>
             <div className="info-tag">
               <ProgressBar progress={data.progress}></ProgressBar>

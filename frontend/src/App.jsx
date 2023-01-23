@@ -1,7 +1,6 @@
 import './App.css'
 import HeaderBar from './components/HeaderBar'
-import BillCard from './pages/Bills/components/BillCard'
-import Asset from './pages/Asset'
+import Asset from './pages/Assets/Asset'
 import Error from './components/error/Error'
 import AddSpend from './pages/AddSpend'
 import Bills from './pages/Bills/Bills'
@@ -13,13 +12,13 @@ function App() {
     <div className="App">
       <HeaderBar/>
 
-      {/* <Error>
+      <Error>
         <Asset></Asset>
-      </Error> */}
+      </Error>
 
       {/* <AddSpend></AddSpend> */}
     
-      <Bills></Bills>
+      {/* <Bills></Bills> */}
       
     </div>
   )
