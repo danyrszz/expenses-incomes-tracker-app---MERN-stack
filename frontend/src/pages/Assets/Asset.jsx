@@ -10,7 +10,7 @@ export default function Asset () {
   const [data] = useGetAssets()
   const assetPage =
   (
-  <div className="content">
+  <div className="flex-centered">
       <div className="card asset-page-wrapper">
           <div className="asset-page-column flex-column">
             <div className="data-tag">

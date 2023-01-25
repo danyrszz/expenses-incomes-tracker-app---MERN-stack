@@ -1,0 +1,19 @@
+.input-wrapper{
+  display: flex;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--darkerPurple);
+  width: 100%;
+}
+.input-wrapper > input {
+  font-size: 1.3em;
+}
+.form-icon {
+  font-size: 2.5em;
+  color: var(--darkerPurple)
+}
+.input-styled{
+  border: none;
+}
+.input-styled:focus{
+  outline: none;
+}

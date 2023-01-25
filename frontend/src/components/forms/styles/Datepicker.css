@@ -1,0 +1,16 @@
+.datepicker-input{
+  border: 1px solid var(--darkerPurple);
+  background-color: white;
+  color: var(--darkerPurple);
+  cursor: pointer;
+  box-shadow: 1px 1px 5px -2px #888888;
+}
+.datepicker-input:focus{
+  background-color: var(--pinky);
+}
+.datepicker-wrapper{
+  justify-content: space-around;
+}
+.datepicker-wrapper>input{
+  background-color: white;
+}

@@ -18,6 +18,11 @@ export function getFormattedDate (date) {
     return `${d.getDate()} de ${month[d.getMonth()]} de ${d.getFullYear()}`
 }
 
+export function getDashedDate(date){
+    const d = new Date(date)
+    return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
+}
+
 export function getCurrentMonthDate (){
     const now = new Date()
     const date = {

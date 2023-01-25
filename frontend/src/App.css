@@ -53,3 +53,10 @@ select {
   cursor: inherit;
   line-height: inherit;
 }
+
+@media screen and (max-width:500px) {
+  .card{
+    border-radius: 0;
+    width: 100%;
+  }
+}

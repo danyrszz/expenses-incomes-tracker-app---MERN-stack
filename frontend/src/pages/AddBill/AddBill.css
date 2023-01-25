@@ -1,0 +1,19 @@
+.card-add-bill{
+  display: flex;
+  padding: 20px;
+}
+.card-add-bill > * {
+  margin: 20px;
+}
+.form-wrapper{
+  margin-top: 10px;
+}
+@media screen and (max-width:500px) {
+  .form-wrapper{
+    justify-content: center;
+    border-radius: 0px;
+    padding: 0px;
+    width:100%;
+    background-color: red;
+  }
+}

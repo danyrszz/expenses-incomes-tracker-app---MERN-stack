@@ -1,0 +1,23 @@
+.button{
+  border: none;
+  padding: 10px 20px;
+  outline: 3px solid var(--darkerPurple);
+  background-color: var(--darkerPurple);
+  text-align: center;
+  color:white;
+  cursor: pointer;
+  font-weight: bolder;
+  transition: background-color 0.2s;
+}
+.button:hover{
+  background-color: var(--pinky);
+  color: var(--darkerPurple);
+  outline: 3px solid var(--darkerPurple)
+}
+.button-elements{
+  display: flex;
+  align-items: center;
+}
+.button-elements > .material-symbols-outlined{
+  padding-right: 5px;
+}
