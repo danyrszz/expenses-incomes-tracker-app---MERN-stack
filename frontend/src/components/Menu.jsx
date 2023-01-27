@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import './styles/Menu.css'
 
-export default function Menu ({menu}) {
-  const [menuShown, setMenuShown] = useState(false)
+export default function Menu ({menu, currentTitle}) {
 
-  function showMenu(){
+  const [menuShown, setMenuShown] = useState(false)
+  const showMenu = () => setMenuShown(!menuShown)
+
+  function handleSelection (title) {
     setMenuShown(!menuShown)
+    currentTitle(title)
   }
   
   return(
@@ -24,14 +28,14 @@ export default function Menu ({menu}) {
               menu.map((element,i)=>{
                 if(element.submenu === null){
                   return(
-                    <a href={element.link} key={element.title}>
+                    <Link to={element.link} key={element.title} onClick={()=>handleSelection(element.title)}>
                       <li className='single-element'>
                         <div className="element-container">
                           <span class="material-symbols-outlined">{element.icon}</span>
                           <span>{element.title}</span>
                         </div>
                       </li>
-                    </a>
+                    </Link>
                   )
                 }else{
                   i = useRef()
@@ -51,14 +55,16 @@ export default function Menu ({menu}) {
                         <span>{element.title}</span>           
                       </div>
                       <ul className='submenu submenu-closed'>
-                        {element.submenu.map((element,i)=>{
+                        {element.submenu.map((submenu,i)=>{
                           return(
-                            <li key={element.title}>
+                            <Link to={submenu.link} key={submenu.title} onClick={()=>handleSelection(`${element.title} > ${submenu.title}`)}>
+                            <li >
                             <div className="element-container">
-                              <span class="material-symbols-outlined">{element.icon}</span>
-                              <span>{element.title}</span>
+                              <span class="material-symbols-outlined">{submenu.icon}</span>
+                              <span>{submenu.title}</span>
                             </div>
                             </li>
+                            </Link>
                           )
                         })}
                       </ul>
