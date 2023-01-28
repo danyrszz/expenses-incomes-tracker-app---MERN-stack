@@ -6,5 +6,6 @@ export const endpoints = {
   { 
     betweenDates : (startingDate, endingDate) => `${domain}/bills/betweendates/${startingDate}/${endingDate}`,
     delete : (id) => `${domain}/bills/${id}`,
+    add : () => `${domain}/bills`
   },
 }

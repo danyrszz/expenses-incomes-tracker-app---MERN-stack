@@ -12,11 +12,11 @@ import MonthYearSelector from './components/MonthYearSelector'
 export default function Bills(){
   
   const ribbonDuration = 2000
+  const [showRibbon, setShowRibbon] = useState(false)
 
   const [dates, setDates] = useState (getDates(getCurrentDate().month,getCurrentDate().year))
 
   //states to handle delete and edit
-  const [showRibbon, setShowRibbon] = useState(false)
   const [showConfirmMessage, setShowConfirmMessage] = useState(false)
   const [selectedBill, setSelectedBill] = useState('')
 

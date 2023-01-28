@@ -8,3 +8,16 @@ export async function fetchData (url, method) {
       return []
     }
   }
+
+export async function saveData (url,method,body) { 
+  const res = await fetch( url, 
+    {
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+    },
+    method : method,
+    body : JSON.stringify(body)
+    })
+  return res.json()
+}

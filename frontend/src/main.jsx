@@ -1,7 +1,6 @@
-import React, { Children } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-//import './index.css'
 import Asset from './pages/Assets/Asset'
 import Error from './components/error/Error'
 import Bills from './pages/Bills/Bills'
