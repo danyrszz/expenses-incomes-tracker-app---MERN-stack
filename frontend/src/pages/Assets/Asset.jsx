@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import useGetAssets from './useGetAssets'
 import MCAR from '../../assets/MCAR.png'
 import ProgressBar from '../../components/ProgressBar'
@@ -46,3 +45,10 @@ export default function Asset () {
   }
   return assetPage
 }
+
+/*
+this app is intended to be used for me with only one asset
+so i havent coded it to use multiple assets
+but it would be a feature to be implemented in a future version
+having said so it's coded to work the way its supposed to work
+*/
