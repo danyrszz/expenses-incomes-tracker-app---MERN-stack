@@ -35,9 +35,9 @@ export default function AddBill (){
       <div className="card card-add-bill flex-column">
         <TextInput 
           name="quantity" 
-          placeholder="Ingresa cantidad" 
+          placeholder="Cantidad" 
           icon="attach_money" 
-          setData={ (val) => manageChangeData("quantity",val)} 
+          setData={ (val) => manageChangeData("quantity",val)}
         />
         <Datepicker setData={ (val) => manageChangeData("date",val)}/>
         <Button title="Guardar" icon="save" action={handleSaveButton}/>

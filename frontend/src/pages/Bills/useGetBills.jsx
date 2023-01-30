@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
+import useConfirmMessage from "../../components/Snacks/useConfirmMessage";
 import { endpoints } from "../../utils/endpoints";
 import { fetchData } from "../../utils/fetch";
 
-export default function useGetBills(startingDate, endingDate, selectedBill){
+export default function useGetBills(startingDate, endingDate){
 
   const [bills, setBills] = useState([])
+  const [billToDelete, setBillToDelete] = useState('')
   const [isDeleted, setIsDeleted] = useState(false)
   const fetchUrl = endpoints.bills.betweenDates(startingDate,endingDate)
-  const deleteUrl = endpoints.bills.delete(selectedBill)
+  
+  const {
+    ribbonDuration, 
+    showRibbon, 
+    ribbonMessage, 
+    dialogVisible, 
+    handleConfirmation, 
+    showConfirmDialog,
+    changeVisible
+  } = useConfirmMessage()
   
   //fetch data when the date changes
   useEffect(()=>{
@@ -15,12 +26,37 @@ export default function useGetBills(startingDate, endingDate, selectedBill){
     .then(res => setBills(res))
   }, [startingDate, endingDate])
   
-  async function deleteBill(){
-    const res = await fetchData(deleteUrl,'delete')
-    res.ok ? setIsDeleted(true) : setIsDeleted(false)
-    const data = await fetchData(fetchUrl,'get')
-    setBills(data)
+  function askDeleteConfirmation (bill) {
+    showConfirmDialog()
+    setBillToDelete(endpoints.bills.delete(bill))
   }
 
-  return [bills, deleteBill, isDeleted]
+  async function deleteBill(confirmed){
+    if(confirmed){
+      const res = await fetchData(billToDelete,'delete')
+      if(res.ok){
+        handleConfirmation(true, "Se ha eliminado correctamente.")
+        setIsDeleted(true)
+      }else{
+        handleConfirmation(true,"No se ha podido eliminar.")
+        setIsDeleted(false)
+      }
+      const data = await fetchData(fetchUrl,'get')
+      setBills(data)
+    }else{
+      handleConfirmation(false)
+    }
+  }
+
+  return {bills, 
+    deleteBill, 
+    askDeleteConfirmation, 
+    handleConfirmation,
+    changeVisible,
+    isDeleted,
+    dialogVisible,
+    ribbonDuration, 
+    showRibbon, 
+    ribbonMessage,
+  }
 }
