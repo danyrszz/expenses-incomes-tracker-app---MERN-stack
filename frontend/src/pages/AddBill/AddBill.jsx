@@ -17,8 +17,8 @@ export default function AddBill (){
     ribbonDuration,
     showRibbon,
     ribbonMessage,
-    changeVisible
-   } = useSaveBill(data)
+    changeVisible,
+   } = useSaveBill(data, manageChangeData)
   
   function manageChangeData (name,val){
     setData({
@@ -36,8 +36,9 @@ export default function AddBill (){
         <TextInput 
           name="quantity" 
           placeholder="Cantidad" 
-          icon="attach_money" 
-          setData={ (val) => manageChangeData("quantity",val) }
+          icon="attach_money"
+          value={data.quantity}
+          changeVal = { (val) => manageChangeData("quantity",val) }
         />
         <Datepicker setData={ (val) => manageChangeData("date",val)}/>
         <Button title="Guardar" icon="save" action={handleSaveButton}/>

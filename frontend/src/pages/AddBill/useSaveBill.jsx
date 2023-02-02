@@ -4,7 +4,7 @@ import { endpoints } from '../../utils/endpoints'
 import { saveData as store } from '../../utils/fetch'
 import useGetAssetID from '../useGetAssetId'
 
-export default function useSaveBill(data){
+export default function useSaveBill(data, manageChangeData){
 
   const [isSaved, setIsSaved] = useState(false)
   const {currentAsset} = useGetAssetID()
@@ -39,6 +39,7 @@ export default function useSaveBill(data){
     return
     }
     setSavingParams('Información guardada correctamente', true, true)
+    manageChangeData("quantity", "")
   }
   
   async function saveData (body) {
@@ -55,6 +56,6 @@ export default function useSaveBill(data){
     ribbonMessage,
     changeDuration,
     changeVisible,
-    changeMessage  
+    changeMessage,
   }
 }

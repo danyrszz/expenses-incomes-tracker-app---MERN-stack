@@ -1,18 +1,3 @@
-.confirm-msg-wrapper{
-  position:absolute;
-  top:0;
-  left:0;
-  width: 100vw;
-  height: 100vh;
-  background:rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-}
-.confirm-msg-wrapper-opened{
-  visibility: visible;
-}
-.confirm-msg-wrapper-closed{
-  visibility: hidden;
-}
 .confirm-message p{
   font-size: 1.2em;
   padding: 20px 0;

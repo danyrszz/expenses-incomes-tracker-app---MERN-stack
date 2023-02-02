@@ -27,7 +27,6 @@ export default function Bills(){
 
   return(
     <div className="bills-wrapper">
-
       <Ribbon success={isDeleted} visible={showRibbon} onClose={()=>changeVisible(false)} duration={ribbonDuration}>
         <p>{ribbonMessage}</p>
       </Ribbon>

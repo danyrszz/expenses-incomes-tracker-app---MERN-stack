@@ -1,13 +1,5 @@
 import './styles/TextInput.css'
-import { useState } from 'react'
-export default function TextInput ({placeholder,name,icon,setData}){
-
-  const [value, setValue] = useState("")
-
-  function handleChange(value){
-    setValue(value)
-    setData(value)
-  }
+export default function TextInput ({placeholder,name,icon, value, changeVal}){
 
   return(
     <div className="input-wrapper">
@@ -17,11 +9,12 @@ export default function TextInput ({placeholder,name,icon,setData}){
       </span>
 
       <input 
-        name={name} 
+        name={name}
         placeholder={placeholder} 
         className='input-styled' 
-        value={value} 
-        onChange={e=>handleChange(e.target.value)}/>
+        value={value}
+        onChange={(e)=>changeVal(e.target.value)}
+        />
     </div>
   )
 }
