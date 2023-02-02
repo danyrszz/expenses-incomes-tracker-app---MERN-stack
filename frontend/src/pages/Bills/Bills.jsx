@@ -6,6 +6,7 @@ import Ribbon from '../../components/Snacks/Ribbon'
 import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
 import NoData from '../../components/NoData'
 import MonthYearSelector from './components/MonthYearSelector'
+import ModalContainer from '../../components/Snacks/ModalContainer'
 import './Bill.css'
 
 export default function Bills(){
@@ -31,9 +32,11 @@ export default function Bills(){
         <p>{ribbonMessage}</p>
       </Ribbon>
 
-      <ConfirmMessage visible={dialogVisible} handleConfirmation={(confirmation) => deleteBill(confirmation)}>
-        <p>¿Seguro que desea eliminar?</p>
-      </ConfirmMessage>
+      <ModalContainer  visible={dialogVisible}>
+        <ConfirmMessage handleConfirmation={(confirmation) => deleteBill(confirmation)}>
+          <p>¿Seguro que desea eliminar?</p>
+        </ConfirmMessage>
+      </ModalContainer>
 
       <div className="bill-section flex-row">
         <MonthYearSelector queryDates={(dates)=>setDates(dates)} />

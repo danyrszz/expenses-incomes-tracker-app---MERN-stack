@@ -53,6 +53,21 @@ select {
   cursor: inherit;
   line-height: inherit;
 }
+.modal{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background:rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+.modal-opened{
+  visibility: visible;
+}
+.modal-closed{
+  visibility: hidden;
+}
 
 @media screen and (max-width:500px) {
   .card{

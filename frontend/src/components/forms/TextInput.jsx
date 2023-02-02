@@ -13,10 +13,15 @@ export default function TextInput ({placeholder,name,icon,setData}){
     <div className="input-wrapper">
 
       <span class="material-symbols-outlined form-icon">
-      {icon}
+        {icon}
       </span>
 
-      <input name={name} placeholder={placeholder} className='input-styled' value={value} onChange={e=>handleChange(e.target.value)}/>
+      <input 
+        name={name} 
+        placeholder={placeholder} 
+        className='input-styled' 
+        value={value} 
+        onChange={e=>handleChange(e.target.value)}/>
     </div>
   )
 }

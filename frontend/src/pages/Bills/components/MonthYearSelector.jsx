@@ -19,7 +19,7 @@ export default function MonthYearSelector({queryDates}){
 
   return (
     <form action="/">
-      <select className='select' name="months" id="months" value={dates.month} onChange={(e)=>setCurrentMonth(e.target.value)}>
+      <select className='select' name="months" id="months" value={currentMonth} onChange={(e)=>setCurrentMonth(e.target.value)}>
         <option value="1">Enero</option>
         <option value="2">Febrero</option>
         <option value="3">Marzo</option>
@@ -34,7 +34,7 @@ export default function MonthYearSelector({queryDates}){
         <option value="12">Diciembre</option>
       </select>
 
-      <select className='select' name="years" id="months" value={dates.year} onChange={(e)=>setCurrentYear(e.target.value)}>
+      <select className='select' name="years" id="months" value={currentYear} onChange={(e)=>setCurrentYear(e.target.value)}>
         {yearsArray.map( e => {
           return <option value={e} key={e}>{e}</option>
         })}

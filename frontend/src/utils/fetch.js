@@ -4,7 +4,6 @@ export async function fetchData (url, method) {
     const res = await data.json()
     return res
   }catch(e){
-    console.log(e)
     return []
   }
 }

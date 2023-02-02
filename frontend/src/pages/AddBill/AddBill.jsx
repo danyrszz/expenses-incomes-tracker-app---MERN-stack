@@ -37,7 +37,7 @@ export default function AddBill (){
           name="quantity" 
           placeholder="Cantidad" 
           icon="attach_money" 
-          setData={ (val) => manageChangeData("quantity",val)}
+          setData={ (val) => manageChangeData("quantity",val) }
         />
         <Datepicker setData={ (val) => manageChangeData("date",val)}/>
         <Button title="Guardar" icon="save" action={handleSaveButton}/>

@@ -1,13 +1,9 @@
 import './BillCard.css'
 import { getFormattedDate } from '../../../utils/date'
 
-export default function BillCard({ amount, date, handleDelete}){
+export default function BillCard({ amount, date, handleDelete, handleEdit}){
 
   const formattedDate = getFormattedDate(date)
-
-  function handleEdit(){
-    console.log("edit")
-  }
 
   return(
     <div className="card billcard-wrapper">

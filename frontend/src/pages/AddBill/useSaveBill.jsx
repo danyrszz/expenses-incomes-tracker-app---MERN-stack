@@ -2,10 +2,12 @@ import { useState } from 'react'
 import useRibbon from '../../components/Snacks/useRibbon'
 import { endpoints } from '../../utils/endpoints'
 import { saveData as store } from '../../utils/fetch'
+import useGetAssetID from '../useGetAssetId'
 
 export default function useSaveBill(data){
 
   const [isSaved, setIsSaved] = useState(false)
+  const {currentAsset} = useGetAssetID()
 
   const {
     ribbonDuration,
@@ -17,27 +19,26 @@ export default function useSaveBill(data){
    } = useRibbon()
 
   async function handleSaveButton(){
-    console.log(data)
-    if( data.quantity && data.date ){
-      const bill = parseInt(data.quantity)
-      const result = await saveData({
-        amount : bill,
-        date : data.date,
-        assetId : "63477dc75ea7762d79a7991a"
-      })
-      if (result){ 
-        changeMessage('Información guardada correctamente')
-        setIsSaved(true)
-        changeVisible(true)
-        return
-      }
-      changeMessage('Algo salio mal, intenta de nuevo.')
-      setIsSaved(false)
-    }else{
-      changeMessage('Completa todos los campos, por favor.')
-      setIsSaved(false)
+    function setSavingParams (message, saved, visible) {
+    changeMessage(message)
+    setIsSaved(saved)
+    changeVisible(visible)
     }
-    changeVisible(true)
+    if(!data.quantity || !data.date){
+    setSavingParams('Completa todos los campos, por favor.',false,true)
+    return
+    } 
+    const bill = parseInt(data.quantity)
+    const result = await saveData({
+    amount : bill,
+    date : data.date,
+    assetId : currentAsset
+    })
+    if (!result){ 
+    setSavingParams('Algo salio mal, intenta de nuevo.',false,true)
+    return
+    }
+    setSavingParams('Información guardada correctamente', true, true)
   }
   
   async function saveData (body) {
