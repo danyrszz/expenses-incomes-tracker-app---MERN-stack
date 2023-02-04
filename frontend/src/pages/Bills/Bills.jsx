@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import useGetBills from './useGetBills'
-import { getCurrentDate, getDates } from '../../utils/date'
+import useGetBills from './hooks/useGetBills'
+import { getCurrentDate, getDates, getDashedDate } from '../../utils/date'
 import BillCard from './components/BillCard'
 import Ribbon from '../../components/Snacks/Ribbon'
 import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
@@ -8,6 +8,7 @@ import NoData from '../../components/NoData'
 import MonthYearSelector from './components/MonthYearSelector'
 import ModalContainer from '../../components/Snacks/ModalContainer'
 import './Bill.css'
+import EditBill from './EditBill'
 
 export default function Bills(){
   
@@ -18,12 +19,31 @@ export default function Bills(){
     deleteBill, 
     askDeleteConfirmation,
     changeVisible,
-    dialogVisible,
+    editBill,
+    closeEditBillDialog,
+    changeBillDataToEdit,
+    saveEditedBill,
+    billDataToEdit,
+    editBillVisible,
+    confirmMessageVisible,
     ribbonDuration, 
     showRibbon, 
     ribbonMessage,
     isDeleted,
   } = useGetBills( dates.startingDate, dates.endingDate)
+
+  function handleClickOnDeleteButton (e){
+    window.scroll(0,0)
+    askDeleteConfirmation(e._id)
+  }
+
+  function handleClickOnEditButton(e){
+    window.scroll(0,0)
+    editBill(
+      {id:e._id,
+      amount:e.amount,
+      date:e.date}
+  )}
 
   return(
     <div className="bills-wrapper">
@@ -31,10 +51,19 @@ export default function Bills(){
         <p>{ribbonMessage}</p>
       </Ribbon>
 
-      <ModalContainer  visible={dialogVisible}>
+      <ModalContainer  visible={confirmMessageVisible}>
         <ConfirmMessage handleConfirmation={(confirmation) => deleteBill(confirmation)}>
-          <p>¿Seguro que desea eliminar?</p>
+          <p>¿Seguro que deseas eliminar?</p>
         </ConfirmMessage>
+      </ModalContainer>
+
+      <ModalContainer visible={editBillVisible}>
+        <EditBill 
+          bill={billDataToEdit}
+          handleSaveEditBill={saveEditedBill}
+          handleCloseEditDialog={closeEditBillDialog}
+          handleChangeData={changeBillDataToEdit}
+        />
       </ModalContainer>
 
       <div className="bill-section flex-row">
@@ -54,18 +83,12 @@ export default function Bills(){
                 amount = {e.amount}
                 key = {e._id}
                 date = {e.date}
-                handleDelete = {()=>{
-                  window.scroll(0,0)
-                  askDeleteConfirmation(e._id)
-                  }}
+                handleDelete = {()=>handleClickOnDeleteButton(e)}
+                handleEdit = {()=>handleClickOnEditButton(e)}          
               />)
           })}
           </div>
-        ) : (
-          <NoData>
-            <p>No hay cuentas en este mes.</p>
-          </NoData>
-        )
+        ) : ( <NoData> <p>No hay cuentas en este mes.</p> </NoData> )
       }
     </div>
   )

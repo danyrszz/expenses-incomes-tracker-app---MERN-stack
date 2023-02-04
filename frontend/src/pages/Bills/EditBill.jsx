@@ -1,0 +1,23 @@
+import TextInput from "../../components/forms/TextInput"
+import Datepicker from "../../components/forms/Datepicker"
+import Button from "../../components/forms/Button"
+
+export default function EditBill({bill, handleCloseEditDialog, handleSaveEditBill, handleChangeData}){
+
+  return (
+    <div className="flex-centered form-wrapper">
+      <div className="card card-add-bill flex-column">
+        <TextInput 
+          name="quantity" 
+          placeholder="Cantidad" 
+          icon="attach_money"
+          value={bill.amount}
+          changeVal = { (val) => handleChangeData("amount",val) }
+        />
+        <Datepicker setData={ (val) => handleChangeData("date",val)} editableDate={bill.date}/>
+        <Button title="Guardar" icon="save" action={handleSaveEditBill}/>
+        <Button title="Cancelar" icon="cancel" action={handleCloseEditDialog}/>
+      </div>
+    </div>
+  )
+}

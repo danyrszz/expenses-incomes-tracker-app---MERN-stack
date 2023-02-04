@@ -11,23 +11,23 @@ export default function useConfirmMessage(){
     changeMessage
   } = useRibbon()
 
-  const [dialogVisible, setDialogVisible] = useState(false)
+  const [confirmMessageVisible, setConfirmMessageVisible] = useState(false)
 
-  function showConfirmDialog () { setDialogVisible(true) }
+  function showConfirmDialog () { setConfirmMessageVisible(true) }
 
   function handleConfirmation (confirmation, message){
     if(confirmation){
-      setDialogVisible(false)
+      setConfirmMessageVisible(false)
       changeVisible(true)
     }else{
-      setDialogVisible(false)
+      setConfirmMessageVisible(false)
       changeVisible(false)
     }
     changeMessage(message)
   }
 
   return {
-      ribbonDuration, showRibbon, ribbonMessage, dialogVisible, handleConfirmation, showConfirmDialog, changeVisible
+      ribbonDuration, showRibbon, ribbonMessage, confirmMessageVisible, handleConfirmation, showConfirmDialog, changeVisible
   }
 
 }

@@ -9,6 +9,7 @@ export default function HeaderBar () {
     <div className='header'>
       <Menu
         menu = {[
+          {title:'Home', icon:'home', link:'/', submenu:null},
           {title:'Activo', icon:'info', link:'/asset', submenu:null},
           {title:'Agregar Cuenta', icon:'add', link:'/addbill', submenu:null},
           {title:'Agregar Gasto', icon:'attach_money', link:'/addspend', submenu:null},

@@ -9,7 +9,7 @@ import './AddBill.css'
 
 export default function AddBill (){
   
-  const [data,setData] = useState({date:getDashedDate(new Date())})
+  const [data,setData] = useState({})
 
   const {
     isSaved, 

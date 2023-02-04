@@ -110,23 +110,25 @@ async function getBill(req,res,next){
 }
 
 async function updateBill(req,res,next){
+  const asset = res.asset
+  const bill = res.data
   try{
-    res.asset.totalIncomes -= res.currentBill.amount
-    res.asset.realEarnings -= res.currentBill.amount
-    res.asset.earnings -= res.currentBill.amount
+    asset.totalIncomes -= bill.amount
+    asset.realEarnings -= bill.amount
+    asset.earnings -= bill.amount
     await res.asset.save() 
   }catch(error){
     return res.status(400).json("error al intentar actualizar el activo")
   }
   const {date,amount} = req.body
-  if(amount) res.currentBill.amount = amount
-  if(date) res.currentBill.date = date
+  if(amount) bill.amount = amount
+  if(date) bill.date = date
   try{
-    res.asset.totalIncomes += res.currentBill.amount
-    res.asset.realEarnings += res.currentBill.amount
-    res.asset.earnings += res.currentBill.amount
-    await res.currentBill.save()
-    await res.asset.save()
+    asset.totalIncomes += bill.amount
+    asset.realEarnings += bill.amount
+    asset.earnings += bill.amount
+    await bill.save()
+    await asset.save()
     next()
   }catch(error){
     return res.status(500).json(responseObject(error,false,"ha ocurrido un error al actualizar la informacion"))

@@ -31,7 +31,7 @@ export default function Menu ({menu, currentTitle}) {
                     <Link to={element.link} key={element.title} onClick={()=>handleSelection(element.title)}>
                       <li className='single-element'>
                         <div className="element-container">
-                          <span class="material-symbols-outlined">{element.icon}</span>
+                          <span className="material-symbols-outlined">{element.icon}</span>
                           <span>{element.title}</span>
                         </div>
                       </li>
@@ -51,7 +51,7 @@ export default function Menu ({menu, currentTitle}) {
                       }
                     }} key={element.title}>
                       <div className="element-container">
-                        <span class="material-symbols-outlined">{element.icon}</span>
+                        <span className="material-symbols-outlined">{element.icon}</span>
                         <span>{element.title}</span>           
                       </div>
                       <ul className='submenu submenu-closed'>
@@ -60,7 +60,7 @@ export default function Menu ({menu, currentTitle}) {
                             <Link to={submenu.link} key={submenu.title} onClick={()=>handleSelection(`${element.title} > ${submenu.title}`)}>
                             <li >
                             <div className="element-container">
-                              <span class="material-symbols-outlined">{submenu.icon}</span>
+                              <span className="material-symbols-outlined">{submenu.icon}</span>
                               <span>{submenu.title}</span>
                             </div>
                             </li>

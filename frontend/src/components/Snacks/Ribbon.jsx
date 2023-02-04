@@ -15,7 +15,7 @@ export default function Ribbon({visible, onClose, success, duration, children}){
     <div className= 
       {`ribbon ${success?'ribbon-yes':'ribbon-no'} flex-row ${visible?'ribbon-opened':'ribbon-closed'}`} 
       onClick={onClose}>
-      <span class="material-symbols-outlined">
+      <span className="material-symbols-outlined">
       {success?'check_circle':'error'}
       </span>
       {children}
