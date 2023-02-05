@@ -60,6 +60,17 @@ router.get('/startingfromdate/:date', async (req,res) => {
   }
 })
 
+//get the last x number of spends
+router.get('/last/:quantity', async(req,res)=>{
+  const number = req.params.quantity
+  try{
+    const spends = await spend.find({}).sort({date:-1}).limit(number)
+    res.json(spends)
+  }catch(error){
+    res.status(400).json(responseObject(error,false,"Error al filtrar los gastos"))
+  }
+})
+
 //get all of the spends ordered by date 
 router.get('/betweendates/:date1/:date2', async (req,res)=>{
   try{

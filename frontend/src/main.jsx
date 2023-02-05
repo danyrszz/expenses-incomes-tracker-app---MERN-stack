@@ -11,6 +11,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Dashboard from './pages/Home/Dashboard'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     element: <App></App>,
     errorElement : <NotFound/>,
     children : [
+      {
+        path: "/",
+        element: <Dashboard/>,    
+      },
       {
         path: "/asset",
         element: <Error><Asset /></Error>,    

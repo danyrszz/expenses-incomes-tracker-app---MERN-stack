@@ -1,0 +1,102 @@
+.dashboard-grid-container{
+  display: grid;
+  height: 600px;
+  margin:2rem 0.5rem;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 40% auto;
+  width: 1000px;
+  gap: 15px;
+}
+
+.dashboard-asset-overview{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.card-height-complete{
+  height: 100%;
+}
+
+.dashboard-asset-block{
+  width: 50%;
+  height: 100%;
+}
+.dashboard-text-title{
+  font-size: 5em;
+  font-weight: 600;
+}
+.dashboard-text-bold{font-weight: 600;}
+.dashboard-text-mini{font-size: 1.2rem;}
+.dashboard-text-small{font-size: 1.5rem;}
+.dashboard-text-medium{font-size: 2.5rem;}
+.dashboard-text-big{font-size: 3.5rem;}
+.dashboard-text-huge{font-size: 5rem;}
+.dashboard-text-enormous{font-size: 6rem;}
+
+.dashboard-text-green{ color: var(--green) }
+.dashboard-text-red{ color: var(--red) }
+
+.dashboard-progress{
+  height: 80%;
+  width: auto;
+}
+
+.card-details{
+  padding: 0;
+}
+.detailed-info-row{
+  width: 100%;
+  padding: 15px 30px;
+  justify-content: space-between;
+}
+.detailed-info-row:nth-child(odd){
+  background-color: var(--pinky);
+}
+.detailed-info-row:nth-child(1){
+  background-color: var(--darkerPurple);
+  color: var(--whiteText);
+  justify-content: center;
+}
+.detailed-info-bordered{
+  border-bottom: 1px solid var(--greyText);
+}
+
+.asset-name-percent{
+  justify-content: space-between;
+}
+
+@media screen and (max-width:830px) {
+  .dashboard-grid-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .mobile-bills-info-row{
+    justify-content: space-evenly
+  }
+}
+
+@media screen and (max-width:750px) {
+  .dashboard-text-mini{font-size: 1rem;}
+  .dashboard-text-small{font-size: 1.2rem;}
+  .dashboard-text-medium{font-size: 1.5rem;}
+  .dashboard-text-big{font-size: 2rem;}
+  .dashboard-text-huge{font-size: 2.2rem;}
+  .dashboard-text-enormous{font-size: 4rem;}
+  .card-height-complete{
+    flex-direction: column;
+  }
+  .investment-title{display: none;}
+}
+
+@media screen and (max-width:660px) {
+  .dashboard-text-mini{font-size: 1rem;}
+  .dashboard-text-small{font-size: 0.8rem;}
+  .dashboard-text-medium{font-size: 1rem;}
+  .dashboard-text-big{font-size: 2rem;}
+  .dashboard-text-huge{font-size: 2rem;}
+  .dashboard-text-enormous{font-size: 2rem;}
+  .dashboard-text-title{
+    font-size: 2.5em;
+    font-weight: 600;
+  }
+}

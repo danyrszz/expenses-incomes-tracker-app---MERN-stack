@@ -53,6 +53,17 @@ router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
   }
 })
 
+//get the last x number of bills
+router.get('/last/:quantity', async(req,res)=>{
+  const number = req.params.quantity
+  try{
+    const bills = await bill.find({}).sort({date:-1}).limit(number)
+    res.json(bills)
+  }catch(error){
+    res.status(400).json(responseObject(error,false,"Error al filtrar cuentas"))
+  }
+})
+
 //save a new bill
 router.post("/", saveBill, getAsset, updateAsset, updateRecoveryProgress)
 

@@ -23,6 +23,13 @@ export function getDashedDate(date){
     return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`
 }
 
+export function getDashedShortDate(date){
+    const d = new Date(date)
+    const month= ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    return `${d.getDate()} / ${month[d.getMonth()]}`
+}
+
+
 export function getCurrentMonthDate (){
     const now = new Date()
     const date = {

@@ -32,7 +32,7 @@ export default function useGetBills(startingDate, endingDate){
     fetchData(fetchUrl,'get')
     .then(res => setBills(res))
   }, [startingDate, endingDate])
-  
+
   function askDeleteConfirmation (bill) {
     showConfirmDialog()
     setSelectedBill(endpoints.bills.bill(bill))
@@ -82,7 +82,7 @@ export default function useGetBills(startingDate, endingDate){
     })
   }
 
-  return {bills, 
+  return {bills,
     deleteBill, 
     askDeleteConfirmation,
     editBill,
