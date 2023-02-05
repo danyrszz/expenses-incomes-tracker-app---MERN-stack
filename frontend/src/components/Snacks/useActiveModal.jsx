@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export default function useActiveModal(visible, modalWrapper){
+export default function useActiveModal(visible){
   
   useEffect(()=>{
     if(visible){

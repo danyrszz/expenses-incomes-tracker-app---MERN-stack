@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import './styles/Menu.css'
+import useActiveModal from '../components/Snacks/useActiveModal'
 
 export default function Menu ({menu, currentTitle}) {
 
   const [menuShown, setMenuShown] = useState(false)
-  const showMenu = () => setMenuShown(!menuShown)
+  useActiveModal(menuShown)
+
+  const showMenu = () =>setMenuShown(!menuShown)
 
   function handleSelection (title) {
     setMenuShown(!menuShown)
