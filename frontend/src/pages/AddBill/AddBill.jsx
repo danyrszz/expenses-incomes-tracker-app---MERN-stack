@@ -4,7 +4,7 @@ import TextInput from "../../components/forms/TextInput"
 import Datepicker from "../../components/forms/Datepicker"
 import Button from "../../components/forms/Button"
 import Ribbon from '../../components/Snacks/Ribbon'
-import { getDashedDate } from "../../utils/date"
+
 import './AddBill.css'
 
 export default function AddBill (){

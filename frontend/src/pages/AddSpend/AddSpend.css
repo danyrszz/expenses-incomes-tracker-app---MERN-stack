@@ -1,0 +1,42 @@
+
+.card-add-spend{
+  min-width: 580px;
+  padding: 20px;
+}
+.card-add-spend > *{
+  margin: 10px;
+}
+
+.form-two-columns{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  gap: 20px;
+}
+.payed-container{
+  padding: 15px;
+  align-items: flex-start;
+}
+.payed-container span{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+@media screen and (max-width:610px) {
+  .card-add-spend{
+    min-width: 100%;
+  }
+  .form-two-columns{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width:500px) {
+  .form-wrapper{
+    justify-content: center;
+    border-radius: 0px;
+    padding: 0px;
+    width:100%;
+  }
+}

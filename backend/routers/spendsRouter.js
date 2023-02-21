@@ -111,6 +111,10 @@ router.get('/filter/', async (req,res)=>{
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
 
+async function deleteSpend (){
+  
+}
+
 async function saveSpend(req,res,next){
   const {name, description, category, amount, assetId, payed} = req.body
   const date = new Date (req.body.date)

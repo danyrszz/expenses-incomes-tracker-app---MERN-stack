@@ -10,6 +10,7 @@
 }
 .datepicker-wrapper{
   justify-content: space-around;
+  margin-top: 20px;
 }
 .datepicker-wrapper>input{
   background-color: white;

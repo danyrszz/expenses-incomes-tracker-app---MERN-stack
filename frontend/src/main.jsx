@@ -5,6 +5,7 @@ import Asset from './pages/Assets/Asset'
 import Error from './components/error/Error'
 import Bills from './pages/Bills/Bills'
 import AddBill from './pages/AddBill/AddBill'
+import AddSpend from './pages/AddSpend/AddSpend'
 import NotFound from './pages/NotFound'
 
 import {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children : [
       {
         path: "/",
-        element: <Dashboard/>,    
+        element: <Error><Dashboard/></Error>,    
       },
       {
         path: "/asset",
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: "/addbill",
         element: <AddBill />,
       },
+      {
+        path: "/addspend",
+        element: <AddSpend />
+      }
     ]
   },
 ]);

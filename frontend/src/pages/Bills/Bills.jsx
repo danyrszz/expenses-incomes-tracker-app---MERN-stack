@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './Bill.css'
 import useGetBills from './hooks/useGetBills'
 import { getCurrentDate, getDates, getDashedDate } from '../../utils/date'
 import BillCard from './components/BillCard'
@@ -7,7 +8,6 @@ import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
 import NoData from '../../components/NoData'
 import MonthYearSelector from './components/MonthYearSelector'
 import ModalContainer from '../../components/Snacks/ModalContainer'
-import './Bill.css'
 import EditBill from './EditBill'
 
 export default function Bills(){

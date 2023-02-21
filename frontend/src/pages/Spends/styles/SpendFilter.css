@@ -1,0 +1,7 @@
+.filter-container{
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  position: absolute;
+  top: var(--headerHeight)
+}

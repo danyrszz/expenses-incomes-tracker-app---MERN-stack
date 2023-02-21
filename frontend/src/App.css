@@ -18,6 +18,7 @@ body{
   --green-darker : #0e832f;
   --red : #DF2929;
   --red-darker: #c22525;
+  --headerHeight : 80px;
   background: var(--background);
 }
 
