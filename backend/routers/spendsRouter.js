@@ -110,9 +110,86 @@ router.get('/filter/', async (req,res)=>{
 
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
+router.delete('/:id', getSpend, getAsset, deleteSpend, updateRecoveryProgress)
+router.patch('/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
 
-async function deleteSpend (){
-  
+
+async function getSpend(req,res,next){
+  try{
+    const selectedSpend = await spend.findById(req.params.id).populate('asset', 'name')
+    res.data = selectedSpend
+    next()
+  }catch(error){
+    return res.status(500).json(responseObject(error,false, "error obteniendo los datos"))
+  }
+}
+
+async function deleteSpend(req,res,next){
+  const spendID = req.params.id
+  const asset = res.asset
+  const amount = res.data.amount
+  try{
+    await spend.deleteOne({_id:spendID})
+    if(res.data.payed){
+      asset.realEarnings += amount
+    }else{
+      asset.earnings += amount
+    }
+    await asset.save()
+    next()
+  }catch(error){
+    return res.status(500).json(responseObject(error,false,"no se ha podido eliminar"))
+  }
+}
+
+async function editSpend(req,res,next){
+  const asset = res.asset
+  const selectedSpend = res.data
+  const previousAmount = selectedSpend.amount
+  const previousPayed = selectedSpend.payed
+  const {name,description,category,amount,payed,date} = req.body
+
+  try{
+    if(name) selectedSpend.name = name
+    if(description) selectedSpend.description = description
+    if(category) selectedSpend.category = category
+    if(date) selectedSpend.date = date
+    if(payed!=undefined) selectedSpend.payed = payed
+    if(amount) selectedSpend.amount = amount
+    await selectedSpend.save()
+  }catch(error){
+    return res.status(500).json(responseObject(error,false,"no se ha podido actualizar el gasto"))
+  }
+
+  try{
+    //if payed was false and has changed to true
+    if(previousPayed!=selectedSpend.payed && selectedSpend.payed){
+      asset.earnings += previousAmount
+      asset.realEarnings -= selectedSpend.amount
+    }
+
+    //if payed was true and has changed to false
+    if(previousPayed!=selectedSpend.payed && !selectedSpend.payed){
+      asset.realEarnings += previousAmount
+      asset.earnings -= selectedSpend.amount
+    }
+
+    //if payed stays the same and its true
+    if(previousPayed===selectedSpend.payed && selectedSpend.payed){
+      asset.realEarnings += previousAmount
+      asset.realEarnings -= selectedSpend.amount
+    }
+
+    //if payed stays the same and its false
+    if(previousPayed===selectedSpend.payed && !selectedSpend.payed){
+      asset.earnings += previousAmount
+      asset.earnings -= selectedSpend.amount
+    }
+    await asset.save()
+    next()
+  }catch(error){
+    return res.status(500).json(responseObject(error,false,"no se ha podido actualizar el activo"))
+  }
 }
 
 async function saveSpend(req,res,next){
