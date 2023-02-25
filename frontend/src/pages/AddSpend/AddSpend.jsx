@@ -7,24 +7,9 @@ import Multiple from "../../components/forms/Multiple"
 import Ribbon from "../../components/Snacks/Ribbon"
 import useSaveSpend from "./useSaveSpend"
 import './AddSpend.css'
-import { fetchData } from "../../utils/fetch"
-import { endpoints } from "../../utils/endpoints"
 import { useLoaderData } from "react-router-dom"
-import { getDashedDate } from "../../utils/date"
-
-export async function loader({params}){
-  const res = await fetchData(endpoints.spends.spend(params.id),'GET')
-  const spend = {
-    id : res._id,
-    payed : res.payed,
-    date : res.date,
-    name : res.name,
-    description : res.description,
-    category : res.category,
-    amount : res.amount,
-  }
-  return {spend}
-}
+import ModalContainer from "../../components/Snacks/ModalContainer"
+import ConfirmMessage from "../../components/Snacks/ConfirmMessage"
 
 export default function AddSpend (){
 
@@ -43,6 +28,9 @@ export default function AddSpend (){
   },[currentSpend])
 
   const {handleSaveButton,
+    handleConfirmDelete,
+    confirmMessageVisible,
+    showConfirmDialog,
     isSaved,
     ribbonDuration,
     showRibbon,
@@ -62,6 +50,14 @@ export default function AddSpend (){
       <Ribbon success={isSaved} visible={showRibbon} duration={ribbonDuration} onClose={()=>changeVisible(false)}>
         <p>{ribbonMessage}</p>
       </Ribbon>
+
+      {currentSpend && 
+        <ModalContainer  visible={confirmMessageVisible}>
+        <ConfirmMessage handleConfirmation={(confirmation) => handleConfirmDelete(confirmation)}>
+          <p>¿Seguro que deseas eliminar?</p>
+        </ConfirmMessage>
+      </ModalContainer>
+      }
 
       <div className="card card-add-spend flex-column">
         <TextInput 
@@ -109,6 +105,8 @@ export default function AddSpend (){
         </div>
 
         <Button title="Guardar" icon="save" action={handleSaveButton}/>
+        {currentSpend && 
+        <Button title="Eliminar" icon="delete" action={showConfirmDialog} />}
         
       </div>
     </div>

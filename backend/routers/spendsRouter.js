@@ -18,7 +18,7 @@ router.get('/', async (req,res,next)=>{
   }
 })
 
-router.get('/:id', getSpend, (req,res)=> res.json(res.data))
+router.get('/id/:id', getSpend, (req,res)=> res.json(res.data))
 
 //sort all spends by amount 
 // router.get('/', async(req,res)=>{
@@ -51,16 +51,6 @@ router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
   }
 })
 
-//filter the spends starting from the provided date
-router.get('/startingfromdate/:date', async (req,res) => {
-  try{
-    const spends = await spend.find({date: {$gte: new Date(req.params.date)}}).populate('asset', 'name -_id')
-    res.json(spends)
-  }catch(error){
-    res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por fecha"))
-  }
-})
-
 //get the last x number of spends
 router.get('/last/:quantity', async(req,res)=>{
   const number = req.params.quantity
@@ -87,7 +77,7 @@ router.get('/betweendates/:date1/:date2', async (req,res)=>{
 })
 
 //get all the spends by one or more filter
-router.get('/filter/', async (req,res)=>{
+router.get('/filter', async (req,res)=>{
   const pipeline = []
   const {category, amount, date} = req.query
   if(category!=undefined) {
@@ -101,6 +91,7 @@ router.get('/filter/', async (req,res)=>{
     const dte = new Date (date)
     pipeline.push({ $match: { date: {$gte : dte} } })
   }
+  console.log(req.query)
   const spends = []
   const results = spend.aggregate(pipeline)
   for await (const result of results) {
@@ -109,9 +100,8 @@ router.get('/filter/', async (req,res)=>{
   res.json(spends)
 })
 
-
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
-router.delete('/:id', getSpend, getAsset, deleteSpend, updateRecoveryProgress)
+router.delete('/id/:id', getSpend, getAsset, deleteSpend, updateRecoveryProgress)
 router.put('/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
 
 

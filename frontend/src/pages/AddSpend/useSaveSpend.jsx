@@ -4,12 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { endpoints } from "../../utils/endpoints";
 import useGetAssetID from "../useGetAssetId";
 import { saveData as store } from "../../utils/fetch";
+import useConfirmMessage from "../../components/Snacks/useConfirmMessage";
+
+import useDeleteSpend from "./useDeleteSpend";
 
 export default function useSaveSpend (data, newRecord){
 
   const [isSaved, setIsSaved] = useState(false)
   const {currentAsset} = useGetAssetID()
   const navigate = useNavigate()
+
+  const {deleteSpend, isDeleted} = useDeleteSpend()
+  const {confirmMessageVisible, handleConfirmation, showConfirmDialog,hideConfirmDialog} = useConfirmMessage()
 
   const {
     ribbonDuration,
@@ -20,13 +26,14 @@ export default function useSaveSpend (data, newRecord){
     changeMessage
    } = useRibbon()
 
+  function setSavingParams (message, saved, visible) {
+    changeMessage(message)
+    setIsSaved(saved)
+    changeVisible(visible)
+  }
+
   async function handleSaveButton(){
     let result
-    function setSavingParams (message, saved, visible) {
-      changeMessage(message)
-      setIsSaved(saved)
-      changeVisible(visible)
-    }
     if(!data.amount || !data.date || !data.category || !data.name ){
       setSavingParams('Completa todos los campos, por favor.',false,true)
       return
@@ -62,8 +69,29 @@ export default function useSaveSpend (data, newRecord){
     return false
   }
 
+  function handleConfirmDelete (confirmation){
+    confirmation ? handleDelete() : hideConfirmDialog()
+  }
+
+  function handleDelete(){
+    try{
+      deleteSpend(data.id)
+      setSavingParams('Información eliminada correctamente', true, true)
+      const timer = setTimeout(() => {
+        navigate('/')
+        if(isSaved) clearTimeout(timer) 
+      }, ribbonDuration)
+    }catch{
+      setSavingParams('Ha ocurrido un error', false, true)
+    }
+    hideConfirmDialog()
+  }
+      
   return {
     handleSaveButton,
+    handleConfirmDelete,
+    confirmMessageVisible,
+    showConfirmDialog,
     isSaved,
     ribbonDuration,
     showRibbon,

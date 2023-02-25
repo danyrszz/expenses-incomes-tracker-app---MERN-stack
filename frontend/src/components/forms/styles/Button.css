@@ -14,6 +14,15 @@
   color: var(--darkerPurple);
   outline: 3px solid var(--darkerPurple)
 }
+.button-delete{
+  background-color: var(--red);
+  outline: 3px solid var(--red-darker);
+}
+.button-delete:hover{
+  background-color: var(--red-darker);
+  outline: 3px solid var(--red-darker);
+  color: white;
+}
 .button-elements{
   display: flex;
   align-items: center;

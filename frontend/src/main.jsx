@@ -9,12 +9,7 @@ import AddBill from './pages/AddBill/AddBill'
 import AddSpend from './pages/AddSpend/AddSpend'
 import NotFound from './pages/NotFound'
 
-import {loader as spendLoader} from './pages/AddSpend/AddSpend'
-
-import { fetchData } from './utils/fetch'
-import { endpoints } from './utils/endpoints'
-
-import useGetSpend from './pages/AddSpend/useGetSpend'
+import { loader as spendLoader } from './pages/AddSpend/loader'
 
 import {
   createBrowserRouter,

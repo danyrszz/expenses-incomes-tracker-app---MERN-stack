@@ -11,7 +11,7 @@ export const endpoints = {
   },
   spends:{
     last: (limit) => `${domain}/spends/last/${limit}`,
-    spend : (id) => `${domain}/spends/${id}`,
+    spend : (id) => `${domain}/spends/id/${id}`,
     add : () => `${domain}/spends`,
   }
 }
