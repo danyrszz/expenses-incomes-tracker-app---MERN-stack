@@ -3,7 +3,6 @@ import Datepicker from "../../components/forms/Datepicker"
 import Button from "../../components/forms/Button"
 
 export default function EditBill({bill, handleCloseEditDialog, handleSaveEditBill, handleChangeData}){
-
   return (
     <div className="flex-centered form-wrapper">
       <div className="card card-add-bill flex-column">

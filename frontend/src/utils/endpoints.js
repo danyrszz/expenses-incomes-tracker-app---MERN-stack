@@ -11,8 +11,9 @@ export const endpoints = {
   },
   spends:{
     last: (limit) => `${domain}/spends/last/${limit}`,
-    add : () => `${domain}/spends`
+    spend : (id) => `${domain}/spends/${id}`,
+    add : () => `${domain}/spends`,
   }
 }
 
-export const categories = ['tramite', 'servicio', 'reparacion']
+export const categories = ['tramite', 'servicio', 'reparacion', 'refaccion']

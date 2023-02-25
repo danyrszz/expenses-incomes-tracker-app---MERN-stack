@@ -4,9 +4,17 @@ import App from './App'
 import Asset from './pages/Assets/Asset'
 import Error from './components/error/Error'
 import Bills from './pages/Bills/Bills'
+import Spends from './pages/Spends/Spends'
 import AddBill from './pages/AddBill/AddBill'
 import AddSpend from './pages/AddSpend/AddSpend'
 import NotFound from './pages/NotFound'
+
+import {loader as spendLoader} from './pages/AddSpend/AddSpend'
+
+import { fetchData } from './utils/fetch'
+import { endpoints } from './utils/endpoints'
+
+import useGetSpend from './pages/AddSpend/useGetSpend'
 
 import {
   createBrowserRouter,
@@ -33,13 +41,22 @@ const router = createBrowserRouter([
         element: <Bills />,
       },
       {
+        path: "/spends",
+        element: <Spends />,
+      },
+      {
         path: "/addbill",
         element: <AddBill />,
       },
       {
         path: "/addspend",
         element: <AddSpend />
-      }
+      },
+      {
+        path: "/addspend/:id",
+        element: <AddSpend />,
+        loader : spendLoader
+      },
     ]
   },
 ]);

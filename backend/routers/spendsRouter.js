@@ -11,13 +11,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/taxi')
 //get all of the spends
 //AGREGAR PAGINATION PENDIENTE
 router.get('/', async (req,res,next)=>{
-console.log(req.query)
   try{
     res.json ( await spend.find({}).populate('asset','name -_id'))
   }catch(error){
     res.status(400).json(responseObject(error,false,"Error obteniendo todos los gastos"))
   }
 })
+
+router.get('/:id', getSpend, (req,res)=> res.json(res.data))
 
 //sort all spends by amount 
 // router.get('/', async(req,res)=>{
@@ -111,7 +112,7 @@ router.get('/filter/', async (req,res)=>{
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
 router.delete('/:id', getSpend, getAsset, deleteSpend, updateRecoveryProgress)
-router.patch('/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
+router.put('/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
 
 
 async function getSpend(req,res,next){
@@ -120,7 +121,7 @@ async function getSpend(req,res,next){
     res.data = selectedSpend
     next()
   }catch(error){
-    return res.status(500).json(responseObject(error,false, "error obteniendo los datos"))
+    return res.status(500).json(responseObject(error,false, "no existe el gasto que estas buscando."))
   }
 }
 

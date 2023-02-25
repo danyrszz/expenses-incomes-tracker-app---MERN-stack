@@ -40,7 +40,6 @@ export default function useSaveBill(data, manageChangeData){
       return
     }
     setSavingParams('Información guardada correctamente', true, true)
-    manageChangeData("quantity", "")
     const timer = setTimeout(() => {
       navigate('/bills')
       if(isSaved) clearTimeout(timer) 
