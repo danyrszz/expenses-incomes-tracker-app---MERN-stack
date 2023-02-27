@@ -52,7 +52,7 @@ export default function Dashboard(){
           {
             lastSpends.map(e=>{
               return (
-                <div className="detailed-info-row flex-centered dashboard-text-small">
+                <div className="detailed-info-row flex-centered dashboard-text-small" key={e._id} >
                   <span className='dashboard-text-red dashboard-text-bold'> {getDashedShortDate(e.date)} </span>
                   <span className=' dashboard-text-bold dashboard-text-mini'> {reduceTo(e.name,20)} </span>
                   <span className='dashboard-text-red dashboard-text-bold'> - $ {e.amount} </span>

@@ -1,0 +1,25 @@
+.spends-table {
+  border-collapse: collapse;
+  background-color: white;
+  width: 95%;
+}
+.spends-table-quantity{
+  color: var(--red);
+  font-weight: 600;
+  text-align: center;
+}
+.spends-table th{
+  background-color: var(--darkPurple);
+  color: white;
+}
+.spends-table tr:hover {
+  background-color: var(--pinky);
+  color: var(--darkPurple);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.spends-table td, .spends-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
