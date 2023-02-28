@@ -42,8 +42,8 @@ export default function Bills(){
     editBill(
       {id:e._id,
       amount:e.amount,
-      date:e.date}
-  )}
+      date:e.date})
+    }
 
   return(
     <div className="bills-wrapper">
@@ -57,14 +57,14 @@ export default function Bills(){
         </ConfirmMessage>
       </ModalContainer>
 
-      <ModalContainer visible={editBillVisible}>
+      {<ModalContainer visible={editBillVisible}>
         <EditBill 
           bill={billDataToEdit}
           handleSaveEditBill={saveEditedBill}
           handleCloseEditDialog={closeEditBillDialog}
           handleChangeData={changeBillDataToEdit}
         />
-      </ModalContainer>
+      </ModalContainer>}
 
       <div className="bill-section flex-row">
         <MonthYearSelector queryDates={(dates)=>setDates(dates)} />

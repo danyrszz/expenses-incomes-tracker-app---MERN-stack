@@ -15,7 +15,6 @@
 .spends-table tr:hover {
   background-color: var(--pinky);
   color: var(--darkPurple);
-  font-weight: 600;
   cursor: pointer;
 }
 

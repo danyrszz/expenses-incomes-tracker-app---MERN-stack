@@ -1,8 +1,10 @@
 import TextInput from "../../components/forms/TextInput"
 import Datepicker from "../../components/forms/Datepicker"
 import Button from "../../components/forms/Button"
+import { useEffect } from "react"
 
 export default function EditBill({bill, handleCloseEditDialog, handleSaveEditBill, handleChangeData}){
+
   return (
     <div className="flex-centered form-wrapper">
       <div className="card card-add-bill flex-column">
@@ -10,10 +12,10 @@ export default function EditBill({bill, handleCloseEditDialog, handleSaveEditBil
           name="quantity" 
           placeholder="Cantidad" 
           icon="attach_money"
-          value={bill.amount}
+          value={bill&& bill.amount}
           changeVal = { (val) => handleChangeData("amount",val) }
         />
-        <Datepicker setData={ (val) => handleChangeData("date",val)} editableDate={bill.date}/>
+        <Datepicker setData={ (val) => handleChangeData("date",val)} editableDate={bill && bill.date}/>
         <Button title="Guardar" icon="save" action={handleSaveEditBill}/>
         <Button title="Cancelar" icon="cancel" action={handleCloseEditDialog}/>
       </div>

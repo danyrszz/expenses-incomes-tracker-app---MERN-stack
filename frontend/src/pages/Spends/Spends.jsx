@@ -1,7 +1,6 @@
 import useGetLastSpends from '../Home/useGetLastSpends'
 import './styles/Spends.css'
 import {getFormattedDate} from '../../utils/date'
-import {getFormattedDate} from '../../utils/date'
 import { useNavigate } from 'react-router-dom'
 
 export default function Spends () {

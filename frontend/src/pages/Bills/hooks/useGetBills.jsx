@@ -11,10 +11,7 @@ export default function useGetBills(startingDate, endingDate){
   const fetchUrl = endpoints.bills.betweenDates(startingDate,endingDate)
 
   //editbill
-  const[billDataToEdit, setBillDataToEdit] = useState(
-    {id:'',
-    amount:0,
-    date:null})
+  const[billDataToEdit, setBillDataToEdit] = useState(null)
   const[editBillVisible, setEditBillVisible] = useState(false)
   
   const {

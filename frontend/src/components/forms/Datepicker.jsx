@@ -13,7 +13,7 @@ export default function Datepicker ({setData, editableDate}){
 
   useEffect(()=>{
     setData(getDashedDate(date))
-  },[date])
+  },[])
 
   useEffect(()=>{
     if(editableDate) setDate(new Date(editableDate))
@@ -39,7 +39,10 @@ export default function Datepicker ({setData, editableDate}){
       <div className="datepicker-button flex-centered">
         <DatePicker 
           selected={date} 
-          onChange={(date) => setDate(date)}
+          onChange={(date) => {
+            setDate(date)
+            setData(getDashedDate(date))
+            }}
           customInput={<DatepickerButton />} />
       </div>
     </div>
