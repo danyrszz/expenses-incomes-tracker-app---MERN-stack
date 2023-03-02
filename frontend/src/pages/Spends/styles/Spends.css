@@ -1,4 +1,6 @@
 .spends-table {
+  margin: 0 auto;
+  margin-top: 20px;
   border-collapse: collapse;
   background-color: white;
   width: 95%;

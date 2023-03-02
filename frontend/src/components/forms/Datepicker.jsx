@@ -11,13 +11,13 @@ export default function Datepicker ({setData, editableDate}){
 
   const [date, setDate] = useState(new Date())
 
-  useEffect(()=>{
-    setData(getDashedDate(date))
-  },[])
+  // useEffect(()=>{
+  //   setData(getDashedDate(date))
+  // },[])
 
   useEffect(()=>{
     if(editableDate) setDate(new Date(editableDate))
-  },[editableDate])
+  },[])
 
   const DatepickerButton = React.forwardRef(({ onClick }, ref) => (
     <button className='datepicker-input' onClick={onClick} ref={ref}>

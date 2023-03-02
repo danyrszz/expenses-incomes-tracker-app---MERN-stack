@@ -4,17 +4,12 @@ import { Link } from 'react-router-dom'
 import './styles/Menu.css'
 import useActiveModal from '../components/Snacks/useActiveModal'
 
-export default function Menu ({menu, currentTitle}) {
+export default function Menu ({menu}) {
 
   const [menuShown, setMenuShown] = useState(false)
   useActiveModal(menuShown)
 
   const showMenu = () =>setMenuShown(!menuShown)
-
-  function handleSelection (title) {
-    setMenuShown(!menuShown)
-    currentTitle(title)
-  }
   
   return(
     <div className='button-container'>
@@ -31,7 +26,7 @@ export default function Menu ({menu, currentTitle}) {
               menu.map((element,i)=>{
                 if(element.submenu === null){
                   return(
-                    <Link to={element.link} key={element.title} onClick={()=>handleSelection(element.title)}>
+                    <Link to={element.link} key={element.title} onClick={()=>setMenuShown(!menuShown)}>
                       <li className='single-element'>
                         <div className="element-container">
                           <span className="material-symbols-outlined">{element.icon}</span>
@@ -60,7 +55,7 @@ export default function Menu ({menu, currentTitle}) {
                       <ul className='submenu submenu-closed'>
                         {element.submenu.map((submenu,i)=>{
                           return(
-                            <Link to={submenu.link} key={submenu.title} onClick={()=>handleSelection(`${element.title} > ${submenu.title}`)}>
+                            <Link to={submenu.link} key={submenu.title} onClick={()=>setMenuShown(!menuShown)}>
                             <li >
                             <div className="element-container">
                               <span className="material-symbols-outlined">{submenu.icon}</span>
