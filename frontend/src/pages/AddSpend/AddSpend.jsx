@@ -8,6 +8,7 @@ import Ribbon from "../../components/Snacks/Ribbon"
 import useSaveSpend from "./useSaveSpend"
 import './AddSpend.css'
 import { useLoaderData } from "react-router-dom"
+import InformativeMessage from "../../components/InformativeMessage"
 import ModalContainer from "../../components/Snacks/ModalContainer"
 import ConfirmMessage from "../../components/Snacks/ConfirmMessage"
 
@@ -45,6 +46,10 @@ export default function AddSpend (){
   }
   
   return(
+    <>
+    {!newRecord &&
+      <InformativeMessage message='Estás editando un gasto'/>
+    }
     <div className="flex-centered form-wrapper">
 
       <Ribbon success={isSaved} visible={showRibbon} duration={ribbonDuration} onClose={()=>changeVisible(false)}>
@@ -110,5 +115,6 @@ export default function AddSpend (){
         
       </div>
     </div>
+    </>
   )
 }

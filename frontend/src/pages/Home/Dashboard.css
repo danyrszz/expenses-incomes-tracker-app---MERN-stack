@@ -50,7 +50,7 @@
   justify-content: space-between;
 }
 .detailed-info-row:nth-child(odd){
-  background-color: var(--pinky);
+  background-color: var(--grayish);
 }
 .detailed-info-row:nth-child(1){
   background-color: var(--darkerPurple);
@@ -72,6 +72,9 @@
   }
   .mobile-bills-info-row{
     justify-content: space-evenly
+  }
+  .detailed-info-row{
+    padding: 10px 15px;
   }
 }
 

@@ -9,6 +9,7 @@ body{
   --darkerPurple :#735d8e;
   --darkPurple: #7F669D;
   --lightPurple : #BA94D1;
+  --lighterPurple : #f2e4fa;
   --pinky : #DEBACE;
   --creamy : #FBFACD;
   --whiteText : #fff;
@@ -19,6 +20,7 @@ body{
   --red : #DF2929;
   --red-darker: #c22525;
   --headerHeight : 80px;
+  --grayish: #f2f2f2;
   background: var(--background);
 }
 

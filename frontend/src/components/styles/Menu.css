@@ -21,6 +21,7 @@
   top:var(--headerHeight);
   width: 100%;
   height: calc(100% - var(--headerHeight));
+  z-index: 300;
 }
 .menu-wrapper-opened{
   transform: translateX(0%);

@@ -1,6 +1,9 @@
+.spends-table-wrapper{
+  overflow-x: scroll;
+}
 .spends-table {
+  min-width: 1036px;
   margin: 0 auto;
-  margin-top: 20px;
   border-collapse: collapse;
   background-color: white;
   width: 95%;
@@ -14,12 +17,13 @@
   background-color: var(--darkPurple);
   color: white;
 }
+.spends-table tr:nth-child(odd){
+  background-color: var(--grayish);
+}
 .spends-table tr:hover {
   background-color: var(--pinky);
-  color: var(--darkPurple);
   cursor: pointer;
 }
-
 .spends-table td, .spends-table th {
   border: 1px solid #ddd;
   padding: 8px;

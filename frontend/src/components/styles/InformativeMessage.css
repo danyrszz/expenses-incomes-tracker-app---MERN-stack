@@ -1,0 +1,10 @@
+.informative-msg-wrapper{
+  background-color: var(--creamy);
+  padding: 10px 15px;
+  margin:10px;
+  box-shadow: 1px 1px 5px -2px #888888;
+  border-radius: 10px;
+}
+.informative-msg-text{
+  padding-left: 10px;
+}

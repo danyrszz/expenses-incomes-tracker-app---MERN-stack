@@ -1,4 +1,4 @@
-const domain = 'http://localhost:3000'
+const domain = 'http://192.168.0.8:3000'
 
 export const endpoints = {
   assets : () => `${domain}/assets`,

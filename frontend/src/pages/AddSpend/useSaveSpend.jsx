@@ -41,6 +41,7 @@ export default function useSaveSpend (data, newRecord){
     if(newRecord){
       result = await saveData ( data,endpoints.spends.add(),'post' )
     }else{
+      console.log("here")
       result = await saveData ( data, endpoints.spends.spend(data.id), 'put' )
     }
     if (!result){ 
@@ -49,7 +50,7 @@ export default function useSaveSpend (data, newRecord){
     }
     setSavingParams('Información guardada correctamente', true, true)
     const timer = setTimeout(() => {
-      navigate('/')
+      navigate('/spends')
       if(isSaved) clearTimeout(timer) 
     }, ribbonDuration)
   }
@@ -69,9 +70,7 @@ export default function useSaveSpend (data, newRecord){
     return false
   }
 
-  function handleConfirmDelete (confirmation){
-    confirmation ? handleDelete() : hideConfirmDialog()
-  }
+  const handleConfirmDelete = (confirmation) => confirmation ? handleDelete() : hideConfirmDialog()
 
   function handleDelete(){
     try{

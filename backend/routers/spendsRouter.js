@@ -102,7 +102,7 @@ router.get('/filter', async (req,res)=>{
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)
 router.delete('/id/:id', getSpend, getAsset, deleteSpend, updateRecoveryProgress)
-router.put('/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
+router.put('/id/:id', getSpend, getAsset, editSpend, updateRecoveryProgress)
 
 
 async function getSpend(req,res,next){
