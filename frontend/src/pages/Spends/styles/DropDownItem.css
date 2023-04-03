@@ -52,7 +52,7 @@
 }
 .dropdown-body > div:nth-child(even){
   border-left : 1px solid var(--greyText);
-  overflow-x: scroll;
+  overflow-x: auto;
   white-space: nowrap;
   text-overflow: clip;
 }

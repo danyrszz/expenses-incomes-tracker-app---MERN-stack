@@ -49,7 +49,7 @@ export default function DropDownItem ({data}) {
           <div>Fecha</div>
           <div>{getFormattedDate(data.date)}</div>
           <section className="dropdown-edit-button">
-            <Button icon='edit' title='Editar' action={()=>navigate(`/addspend/${data._id}`)}/>
+            <Button icon='edit' title='Editar' action={()=>navigate(`/addspend/${data._id}`)} type='regular'/>
           </section>
         </div>
       </div>

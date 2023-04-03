@@ -1,9 +1,9 @@
 .spends-table-wrapper{
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 .spends-table {
   min-width: 1036px;
-  margin: 0 auto;
+  margin: 5px auto;
   border-collapse: collapse;
   background-color: white;
   width: 95%;
@@ -21,7 +21,7 @@
   background-color: var(--grayish);
 }
 .spends-table tr:hover {
-  background-color: var(--pinky);
+  background-color: var(--lighterPurple);
   cursor: pointer;
 }
 .spends-table td, .spends-table th {

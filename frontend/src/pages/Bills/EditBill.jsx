@@ -15,9 +15,9 @@ export default function EditBill({bill, handleCloseEditDialog, handleSaveEditBil
           value={bill&& bill.amount}
           changeVal = { (val) => handleChangeData("amount",val) }
         />
-        <Datepicker setData={ (val) => handleChangeData("date",val)} editableDate={bill && bill.date}/>
-        <Button title="Guardar" icon="save" action={handleSaveEditBill}/>
-        <Button title="Cancelar" icon="cancel" action={handleCloseEditDialog}/>
+        <Datepicker setData={ (val) => handleChangeData("date",val)} currentDate={bill && bill.date}/>
+        <Button title="Guardar" icon="save" action={handleSaveEditBill} type='regular'/>
+        <Button title="Cancelar" icon="cancel" action={handleCloseEditDialog} type='delete'/>
       </div>
     </div>
   )

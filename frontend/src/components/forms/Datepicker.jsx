@@ -7,17 +7,16 @@ import {getDashedDate} from '../../utils/date'
 import "react-datepicker/dist/react-datepicker.css";
 import { useEffect } from 'react';
 
-export default function Datepicker ({setData, editableDate}){
+export default function Datepicker ({setData, currentDate}){
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState()
 
   // useEffect(()=>{
-  //   setData(getDashedDate(date))
+  //   if(editableDate) setDate(new Date(editableDate))
+  //   setDate(new Date())
   // },[])
 
-  useEffect(()=>{
-    if(editableDate) setDate(new Date(editableDate))
-  },[])
+  useEffect(()=> {if(currentDate)setDate(new Date(currentDate))}, [currentDate] )
 
   const DatepickerButton = React.forwardRef(({ onClick }, ref) => (
     <button className='datepicker-input' onClick={onClick} ref={ref}>
@@ -34,7 +33,7 @@ export default function Datepicker ({setData, editableDate}){
       calendar_month
       </span>
 
-      <input name="date" placeholder="Fecha" className='input-styled' value={getDashedDate(date)} disabled />
+      <input name="date" placeholder="Fecha" className='input-styled' value={date && getDashedDate(date) } disabled />
 
       <div className="datepicker-button flex-centered">
         <DatePicker 

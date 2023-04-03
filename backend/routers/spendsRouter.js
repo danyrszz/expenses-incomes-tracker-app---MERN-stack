@@ -31,25 +31,25 @@ router.get('/id/:id', getSpend, (req,res)=> res.json(res.data))
 // })
 
 //get spends filtered by category
-router.get('/category/:category', async (req,res,next)=>{
-  try{
-    res.json( await spend.find({category : req.params.category}).populate('asset', 'name -_id'))
-  }catch(error){
-    res.status(400).json(responseObject(error,false,"ha ocurrido un error al obtener los gastos por categoria"))
-  }
-})
+// router.get('/category/:category', async (req,res,next)=>{
+//   try{
+//     res.json( await spend.find({category : req.params.category}).populate('asset', 'name -_id'))
+//   }catch(error){
+//     res.status(400).json(responseObject(error,false,"ha ocurrido un error al obtener los gastos por categoria"))
+//   }
+// })
 
 //get spends filtered by amount
-router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
-  const min = req.params.min
-  const max = req.params.max
-  try {
-    const spends = await spend.find({amount:{$gte:min, $lte:max}}).populate('asset', 'name -_id')
-    res.json(spends)    
-  } catch (error) {
-    res.status(400).json(responseObject(error,false,"Error obteniendo los gastos filtrados por cantidad"))
-  }
-})
+// router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
+//   const min = req.params.min
+//   const max = req.params.max
+//   try {
+//     const spends = await spend.find({amount:{$gte:min, $lte:max}}).populate('asset', 'name -_id')
+//     res.json(spends)    
+//   } catch (error) {
+//     res.status(400).json(responseObject(error,false,"Error obteniendo los gastos filtrados por cantidad"))
+//   }
+// })
 
 //get the last x number of spends
 router.get('/last/:quantity', async(req,res)=>{
@@ -63,18 +63,18 @@ router.get('/last/:quantity', async(req,res)=>{
 })
 
 //get all of the spends ordered by date 
-router.get('/betweendates/:date1/:date2', async (req,res)=>{
-  try{
-    const spends = 
-    await spend.find(
-      {date: { $gte : new Date(req.params.date1) , $lte: new Date(req.params.date2) } }
-    )
-    .populate('asset')
-    res.json(spends)
-  } catch(error) {
-    res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por rango de fechas"))
-  }
-})
+// router.get('/betweendates/:date1/:date2', async (req,res)=>{
+//   try{
+//     const spends = 
+//     await spend.find(
+//       {date: { $gte : new Date(req.params.date1) , $lte: new Date(req.params.date2) } }
+//     )
+//     .populate('asset')
+//     res.json(spends)
+//   } catch(error) {
+//     res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por rango de fechas"))
+//   }
+// })
 
 //get all the spends by one or more filter
 router.get('/filter', async (req,res)=>{
@@ -91,13 +91,42 @@ router.get('/filter', async (req,res)=>{
     const dte = new Date (date)
     pipeline.push({ $match: { date: {$gte : dte} } })
   }
-  console.log(req.query)
   const spends = []
   const results = spend.aggregate(pipeline)
   for await (const result of results) {
       spends.push(result)
   }
   res.json(spends)
+})
+
+router.post("/filter", async (req,res)=>{
+  const {category, amount, date} = req.body
+  const pipeline = []
+  if(!amount && !category && !date) {
+    res.status(400).json(responseObject(null,false,"No hay filtros seleccionados"))
+    return
+  } 
+
+  //date filter
+  if(date && date.start) pipeline.push( { $match : { date: { $gte : new Date(date.start) , $lte: new Date(date.end) }} }) 
+  if(date && date.after) pipeline.push( { $match :{date: { $gte : new Date(date.after) }}}) 
+  if(date && date.before) pipeline.push( { $match :{date: { $lte : new Date(date.before) }}}) 
+
+  //amount filter
+  if(amount && amount.more) pipeline.push( { $match : { amount: { $gte : parseFloat(amount.more) }} }) 
+  if(amount && amount.less) pipeline.push( { $match : { amount: { $lte : parseFloat(amount.less) }} })
+  if(amount && amount.max) pipeline.push( { $match : { amount: { $gte : parseFloat(amount.min), $lte : parseFloat(amount.max) }} })
+
+  //category filter
+  if(category) pipeline.push( { $match : { category: category} }) 
+
+  try{
+    const result = await spend.aggregate(pipeline) 
+    res.json(result)
+  }catch(error){
+    res.status(400).json(responseObject(null,false,"No se ha podido filtrar la información"))
+    return
+  }
 })
 
 router.post('/', saveSpend, getAsset, updateAsset, updateRecoveryProgress)

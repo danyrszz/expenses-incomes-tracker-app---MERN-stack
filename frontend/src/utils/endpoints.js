@@ -1,4 +1,5 @@
-const domain = 'http://192.168.0.8:3000'
+const domain = 'http://192.168.0.87:3000'
+ //const domain = 'http://localhost:3000'
 
 export const endpoints = {
   assets : () => `${domain}/assets`,
@@ -13,6 +14,7 @@ export const endpoints = {
     last: (limit) => `${domain}/spends/last/${limit}`,
     spend : (id) => `${domain}/spends/id/${id}`,
     add : () => `${domain}/spends`,
+    filter : () => `${domain}/spends/filter`,
   }
 }
 

@@ -1,19 +1,19 @@
-import { useState } from "react"
+
 import "./styles/SpendFilter.css"
 
-export default function SpendFilter ({toggleFilterVisible}){
-  const [visible, setVisible] = useState(false)
+export default function SpendFilter ({children, visible, changeVisible}){
 
   return(
     <>
       <div className="filter-bar-container">
-        <span>
-          { !visible ? 'Open Filter' : 'Close Filter'}
+        <span onClick={changeVisible} className={'filter-toggle-button ' + (visible&&'filter-toggle-button-selected') }>
+          { !visible ? 'Abrir filtro' : 'Cerrar filtro'}
         </span>
       </div>
 
       <div className={'filter-container ' + (!visible&&'filter-closed') }>
-        i'm the filter container
+        <p> Filtrar todos los gastos por:</p>
+        {children}
       </div>
     </>
   )

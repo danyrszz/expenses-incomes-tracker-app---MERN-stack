@@ -1,0 +1,35 @@
+.dropdown-filter-container, .dropdown-filter-head{
+  margin: 5px 0;
+}
+.dropdown-filter-head > input {
+  margin-right: 15px;
+}
+.dropdown-filter-body-wrapper{
+  height: 0px;
+  overflow: hidden;
+  max-width: 750px;
+}
+.dropdown-filter-body-wrapper{
+  border-radius: 10px;
+  background-color: var(--lightPurple);
+}
+.dropdown-filter-body{
+  padding: 10px;
+}
+
+.filter-row{
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.filter-row > *{
+  padding-left: 10px;
+}
+.filter-row > label {
+  width: 150px;
+}
+.inline-datepicker{
+  display: inline-block;
+}

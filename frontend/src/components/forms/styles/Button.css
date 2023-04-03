@@ -14,6 +14,11 @@
   color: var(--darkerPurple);
   outline: 3px solid var(--darkerPurple)
 }
+.button-inverted{
+  background-color: var(--pinky);
+  color: var(--darkerPurple);
+  outline: 3px solid var(--darkerPurple)
+}
 .button-delete{
   background-color: var(--red);
   outline: 3px solid var(--red-darker);

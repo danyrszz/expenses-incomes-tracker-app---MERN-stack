@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react"
 import Button from "../../components/forms/Button"
-import Datepicker from "../../components/forms/Datepicker"
-import TextInput from "../../components/forms/TextInput"
 import { categories } from "../../utils/endpoints"
-import Multiple from "../../components/forms/Multiple"
-import Ribbon from "../../components/Snacks/Ribbon"
 import useSaveSpend from "./useSaveSpend"
 import './AddSpend.css'
 import { useLoaderData } from "react-router-dom"
+// components
+import Multiple from "../../components/forms/Multiple"
+import Ribbon from "../../components/Snacks/Ribbon"
+import Datepicker from "../../components/forms/Datepicker"
+import TextInput from "../../components/forms/TextInput"
 import InformativeMessage from "../../components/InformativeMessage"
 import ModalContainer from "../../components/Snacks/ModalContainer"
 import ConfirmMessage from "../../components/Snacks/ConfirmMessage"
@@ -23,7 +24,7 @@ export default function AddSpend (){
       setData(currentSpend.spend)
       setNewRecord(false)
     }else{
-      setData({payed:false, date:new Date()})
+      setData({payed:false})
       setNewRecord(true)
     }
   },[currentSpend])
@@ -47,9 +48,8 @@ export default function AddSpend (){
   
   return(
     <>
-    {!newRecord &&
-      <InformativeMessage message='Estás editando un gasto'/>
-    }
+    { !newRecord && <InformativeMessage message='Estás editando un gasto'/> }
+
     <div className="flex-centered form-wrapper">
 
       <Ribbon success={isSaved} visible={showRibbon} duration={ribbonDuration} onClose={()=>changeVisible(false)}>
@@ -92,7 +92,7 @@ export default function AddSpend (){
 
             <Datepicker 
             setData={ (val) => manageChangeData("date",val)} 
-            editableDate={currentSpend && data.date}/>
+            currentDate={currentSpend && data.date}/>
           </div>
 
           <div className="col2">
@@ -109,9 +109,9 @@ export default function AddSpend (){
           </div>
         </div>
 
-        <Button title="Guardar" icon="save" action={handleSaveButton}/>
-        {currentSpend && 
-        <Button title="Eliminar" icon="delete" action={showConfirmDialog} />}
+        <Button title="Guardar" icon="save" action={handleSaveButton} type='regular'/>
+
+        {currentSpend && <Button title="Eliminar" icon="delete" action={showConfirmDialog} type='delete'/>}
         
       </div>
     </div>

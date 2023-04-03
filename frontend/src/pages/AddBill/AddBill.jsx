@@ -41,7 +41,7 @@ export default function AddBill (){
           changeVal = { (val) => manageChangeData("quantity",val) }
         />
         <Datepicker setData={ (val) => manageChangeData("date",val)}/>
-        <Button title="Guardar" icon="save" action={handleSaveButton}/>
+        <Button title="Guardar" icon="save" action={handleSaveButton} type='regular'/>
       </div>
     </div>
   )
