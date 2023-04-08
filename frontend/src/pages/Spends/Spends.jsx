@@ -64,12 +64,12 @@ export default function Spends () {
           />
         </DropDownFilter>
 
-        <Button icon="search" title="Buscar" action={filterSpends} type='inverted'/>
-        <Button icon="undo" title="Quitar filtros" action={resetFilter} type='inverted'/>
+        <Button icon="search" title="Aplicar" action={filterSpends} type='inverted'/>
+        <Button icon="undo" title="Quitar" action={resetFilter} type='inverted'/>
 
       </SpendFilter>
 
-      {!isFiltered && <InformativeMessage message={`Estás viendo los últimos ${SPENDS_SHOWED} gastos.`}/> }
+      <InformativeMessage message={ !isFiltered ? `Estás viendo los últimos ${SPENDS_SHOWED} gastos.` : 'Estas viendo gastos filtrados'}/>
       {WIDTH>MIN_WIDTH ? 
         <Table spends = { isFiltered ? filteredSpends : spends.lastSpends} /> : 
         <MobileView spends={isFiltered ? filteredSpends : spends.lastSpends}/>

@@ -5,7 +5,7 @@ const spends = require ('./routers/spendsRouter')
 const bills = require ('./routers/billsRouter')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 // var corsOptions = {
 //   origin: 'localhost:3000',
