@@ -6,6 +6,7 @@ import { fetchData, saveData } from "../../../utils/fetch";
 export default function useGetBills(startingDate, endingDate){
 
   const [bills, setBills] = useState([])
+  const [loading,setLoading] = useState(true)
   const [selectedBill, setSelectedBill] = useState('')
   const [isDeleted, setIsDeleted] = useState(false)
   const fetchUrl = endpoints.bills.betweenDates(startingDate,endingDate)
@@ -27,7 +28,10 @@ export default function useGetBills(startingDate, endingDate){
   //fetch data when the date changes
   useEffect(()=>{
     fetchData(fetchUrl,'get')
-    .then(res => setBills(res))
+    .then(res => {
+      setBills(res)
+      setLoading(false)
+    })
   }, [startingDate, endingDate])
 
   function askDeleteConfirmation (bill) {
@@ -80,6 +84,7 @@ export default function useGetBills(startingDate, endingDate){
   }
 
   return {bills,
+    loading,
     deleteBill, 
     askDeleteConfirmation,
     editBill,

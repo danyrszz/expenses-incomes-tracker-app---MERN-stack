@@ -4,10 +4,14 @@ import TextInput from "../../components/forms/TextInput"
 import Datepicker from "../../components/forms/Datepicker"
 import Button from "../../components/forms/Button"
 import Ribbon from '../../components/Snacks/Ribbon'
+import useVerifyLogin from "../../utils/useVerifyLogin"
 
 import './AddBill.css'
 
 export default function AddBill (){
+
+  const token = localStorage.getItem("token")
+  useVerifyLogin(token)
   
   const [data,setData] = useState({})
 

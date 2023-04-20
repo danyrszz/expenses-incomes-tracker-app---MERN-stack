@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
-const responseObject = require('../utils/utils')
+const {responseObject} = require('../utils/utils')
 const {getAsset, updateRecoveryProgress} = require('./common')
 
 const spend = require('../models/spends')

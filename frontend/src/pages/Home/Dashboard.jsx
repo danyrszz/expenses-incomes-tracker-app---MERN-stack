@@ -4,8 +4,12 @@ import useGetLastBills from './useGetLastBills'
 import useGetLastSpends from './useGetLastSpends'
 import { getDashedShortDate } from '../../utils/date'
 import reduceTo from '../../utils/misc'
+import useVerifyLogin from '../../utils/useVerifyLogin'
 
 export default function Dashboard(){
+
+  const token = localStorage.getItem("token")
+  useVerifyLogin(token)
 
   const [data] = useGetAssets()
   const {lastBills} = useGetLastBills(5)
@@ -35,7 +39,7 @@ export default function Dashboard(){
           {
             lastBills.map(e=>{
               return (
-                <div className="detailed-info-row flex-centered dashboard-text-small mobile-bills-info-row">
+                <div className="detailed-info-row flex-centered dashboard-text-small mobile-bills-info-row" key={e._id}>
                   <span className='dashboard-text-red dashboard-text-bold'> {getDashedShortDate(e.date)} </span>
                   <span className='dashboard-text-green dashboard-text-bold'> $ {e.amount} </span>
                 </div>

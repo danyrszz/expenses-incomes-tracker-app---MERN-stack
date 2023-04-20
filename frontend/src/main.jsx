@@ -8,6 +8,7 @@ import Spends from './pages/Spends/Spends'
 import AddBill from './pages/AddBill/AddBill'
 import AddSpend from './pages/AddSpend/AddSpend'
 import NotFound from './pages/NotFound'
+import Login from './pages/login'
 
 import { loader as spendLoader } from './pages/AddSpend/loader'
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
         element: <AddSpend />,
         loader : spendLoader
       },
+      {
+        path: "/login",
+        element : <Login />
+      }
     ]
   },
 ]);

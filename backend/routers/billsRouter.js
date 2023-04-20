@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const bill = require('../models/bills')
-const responseObject = require('../utils/utils')
+const {responseObject, validateToken} = require('../utils/utils')
 mongoose.connect('mongodb://127.0.0.1:27017/taxi')
 
 const {getAsset, updateRecoveryProgress} = require('./common')

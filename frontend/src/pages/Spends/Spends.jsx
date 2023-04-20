@@ -10,12 +10,16 @@ import SpendFilter from './SpendFilter'
 import useFilterSpends from './useFilterSpends'
 import CategoryFilter from './filters/CategoryFilter'
 import { useState } from 'react'
+import useVerifyLogin from '../../utils/useVerifyLogin'
 
 const SPENDS_SHOWED = 10
 const MIN_WIDTH = 1050
 const WIDTH = window.innerWidth
 
 export default function Spends () {
+
+  const token = localStorage.getItem("token")
+  useVerifyLogin(token)
   
   const spends = useGetLastSpends(SPENDS_SHOWED)
   const [date,setDate] = useState(null)

@@ -1,6 +1,14 @@
-export async function fetchData (url, method) {
+export async function fetchData (url, method, authToken) {
   try{
-    const data = await fetch( url, {method:method} )
+    const data = await fetch( url, 
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'auth' : authToken
+        }, 
+      method:method
+    })
     const res = await data.json()
     return res
   }catch(e){
@@ -8,7 +16,7 @@ export async function fetchData (url, method) {
   }
 }
 
-export async function saveData (url,method,body) { 
+export async function saveData (url,method, body) { 
   const res = await fetch( url, 
     {
     headers: {

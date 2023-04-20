@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 const assetSchema = new Schema({
-  //_id : Schema.Types.ObjectId,
   name: String,
   assetCost : Number,
   earnings : Number,

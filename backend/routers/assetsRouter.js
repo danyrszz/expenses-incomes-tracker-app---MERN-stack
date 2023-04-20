@@ -2,8 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = express.Router()
 const asset = require('../models/assets')
+const {validateToken} = require('../utils/utils')
+require('dotenv').config()
+const db = process.env.DB_CONNECTION
 
-mongoose.connect('mongodb://127.0.0.1:27017/taxi')
+mongoose.connect(db)
 
 router.get("/", async (req,res)=>{
   const assets = await asset.find({})

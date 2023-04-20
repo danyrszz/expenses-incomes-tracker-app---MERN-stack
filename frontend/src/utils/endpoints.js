@@ -1,5 +1,5 @@
 const domain = 'http://192.168.0.87:3000'
- //const domain = 'http://localhost:3000'
+//const domain = 'http://localhost:3000'
 
 export const endpoints = {
   assets : () => `${domain}/assets`,
@@ -15,7 +15,9 @@ export const endpoints = {
     spend : (id) => `${domain}/spends/id/${id}`,
     add : () => `${domain}/spends`,
     filter : () => `${domain}/spends/filter`,
-  }
+  },
+  login: ()=> `${domain}/login`,
+  checkLogin : ()=> `${domain}/checkLogin`
 }
 
 export const categories = ['tramite', 'servicio', 'reparacion', 'refaccion']

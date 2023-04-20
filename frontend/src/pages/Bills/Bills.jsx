@@ -3,19 +3,24 @@ import './Bill.css'
 import useGetBills from './hooks/useGetBills'
 import { getCurrentDate, getDates, getDashedDate } from '../../utils/date'
 import BillCard from './components/BillCard'
+import Loading from '../../components/Loading'
 import Ribbon from '../../components/Snacks/Ribbon'
 import ConfirmMessage from '../../components/Snacks/ConfirmMessage'
 import NoData from '../../components/NoData'
 import MonthYearSelector from './components/MonthYearSelector'
 import ModalContainer from '../../components/Snacks/ModalContainer'
 import EditBill from './EditBill'
-
+import useVerifyLogin from '../../utils/useVerifyLogin'
 export default function Bills(){
+
+  const token = localStorage.getItem("token")
+  useVerifyLogin(token)
   
   const [dates, setDates] = useState (getDates(getCurrentDate().month,getCurrentDate().year))
 
   const {
-    bills, 
+    bills,
+    loading, 
     deleteBill, 
     askDeleteConfirmation,
     changeVisible,
@@ -45,8 +50,9 @@ export default function Bills(){
       date:e.date})
     }
 
-  return(
-    <div className="bills-wrapper">
+  return( 
+    loading ? <Loading/> :
+    (<div className="bills-wrapper">
       <Ribbon success={isDeleted} visible={showRibbon} onClose={()=>changeVisible(false)} duration={ribbonDuration}>
         <p>{ribbonMessage}</p>
       </Ribbon>
@@ -90,6 +96,6 @@ export default function Bills(){
           </div>
         ) : ( <NoData> <p>No hay cuentas en este mes.</p> </NoData> )
       }
-    </div>
+    </div>)
   )
 }

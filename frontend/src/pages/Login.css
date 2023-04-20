@@ -1,0 +1,12 @@
+.login-wrapper{
+  margin: 40px;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.login-form input{
+  padding: 10px;
+  margin: 20px;
+}

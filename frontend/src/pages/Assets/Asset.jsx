@@ -4,7 +4,12 @@ import ProgressBar from '../../components/ProgressBar'
 import Loading from '../../components/Loading'
 import './Asset.css'
 import { getFormattedDate } from '../../utils/date'
+import useVerifyLogin from '../../utils/useVerifyLogin'
+
 export default function Asset () {
+
+  const token = localStorage.getItem("token")
+  useVerifyLogin(token)
 
   const [data] = useGetAssets()
   const assetPage =
@@ -40,15 +45,6 @@ export default function Asset () {
   </div>
   )
 
-  if (data.loading) {
-    return <Loading></Loading>
-  }
+  if (data.loading) return <Loading></Loading>
   return assetPage
 }
-
-/*
-this app is intended to be used for me with only one asset
-so i havent coded it to use multiple assets
-but it would be a feature to be implemented in a future version
-having said so it's coded to work the way its supposed to work
-*/

@@ -1,5 +1,5 @@
 const asset = require('../models/assets')
-const responseObject = require('../utils/utils')
+const {responseObject} = require('../utils/utils')
 
 async function getAsset(req,res,next){
   try{
