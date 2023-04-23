@@ -1,3 +1,5 @@
+require('dotenv').config()
+const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
 const assets = require('./routers/assetsRouter')
@@ -8,6 +10,9 @@ const {validateToken} = require('./utils/utils')
 
 const app = express()
 const port = process.env.PORT || 3000
+
+const db = process.env.DB_CONNECTION
+mongoose.connect(db, {dbName : 'taxi'})
 
 // var corsOptions = {
 //   origin: 'localhost:3000',

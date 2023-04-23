@@ -6,7 +6,6 @@ const {getAsset, updateRecoveryProgress} = require('./common')
 
 const spend = require('../models/spends')
 
-mongoose.connect('mongodb://127.0.0.1:27017/taxi') 
 
 //get all of the spends
 //AGREGAR PAGINATION PENDIENTE

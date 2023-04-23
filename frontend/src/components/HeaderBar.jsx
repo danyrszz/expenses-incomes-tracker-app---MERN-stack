@@ -3,7 +3,6 @@ import Menu from './Menu';
 import './styles/HeaderBar.css'
 import { useLocation } from 'react-router-dom';
 import useVerifyLogin from '../utils/useVerifyLogin';
-import Button from '../components/forms/Button'
 import useAuth from '../utils/useAuth';
 
 function changeTitle(route){
@@ -59,7 +58,7 @@ export default function HeaderBar () {
       <div className="header-ex">
         <p>{title}</p>
         {
-          isLoggedIn && <Button icon="close" title="Cerrar Sesión" type="delete" action={logout}/>
+          isLoggedIn && <a onClick={logout} className='logout-click' > Cerrar Sesión </a>
         }
       </div>
     </div>
