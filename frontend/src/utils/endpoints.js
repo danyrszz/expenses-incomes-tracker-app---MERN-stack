@@ -1,4 +1,5 @@
-const domain = 'http://192.168.0.87:3000'
+
+const domain = import.meta.env.VITE_API_SERVICE
 //const domain = 'http://localhost:3000'
 
 export const endpoints = {
