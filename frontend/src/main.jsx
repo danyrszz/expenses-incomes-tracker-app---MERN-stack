@@ -8,7 +8,7 @@ import Spends from './pages/Spends/Spends'
 import AddBill from './pages/AddBill/AddBill'
 import AddSpend from './pages/AddSpend/AddSpend'
 import NotFound from './pages/NotFound'
-import Login from './pages/login'
+import Login from './pages/Login'
 
 import { loader as spendLoader } from './pages/AddSpend/loader'
 
