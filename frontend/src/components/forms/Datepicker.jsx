@@ -11,11 +11,6 @@ export default function Datepicker ({setData, currentDate}){
 
   const [date, setDate] = useState()
 
-  // useEffect(()=>{
-  //   if(editableDate) setDate(new Date(editableDate))
-  //   setDate(new Date())
-  // },[])
-
   useEffect(()=> {if(currentDate)setDate(new Date(currentDate))}, [currentDate] )
 
   const DatepickerButton = React.forwardRef(({ onClick }, ref) => (
@@ -40,7 +35,7 @@ export default function Datepicker ({setData, currentDate}){
           selected={date} 
           onChange={(date) => {
             setDate(date)
-            setData(getDashedDate(date))
+            setData(date)
             }}
           customInput={<DatepickerButton />} />
       </div>

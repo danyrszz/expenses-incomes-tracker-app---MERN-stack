@@ -4,7 +4,7 @@ import { endpoints } from '../../utils/endpoints'
 import { saveData as store } from '../../utils/fetch'
 import useGetAssetID from '../useGetAssetId'
 import { useNavigate } from 'react-router-dom'
-export default function useSaveBill(data, manageChangeData){
+export default function useSaveBill(data){
 
   const [isSaved, setIsSaved] = useState(false)
   const {currentAsset} = useGetAssetID()
@@ -30,6 +30,8 @@ export default function useSaveBill(data, manageChangeData){
       return
     } 
     const bill = parseInt(data.quantity)
+    //const date = new Date (data.date)
+    // date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
     const result = await saveData({
     amount : bill,
     date : data.date,

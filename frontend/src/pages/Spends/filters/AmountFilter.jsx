@@ -18,7 +18,6 @@ export default function AmountFilter ({getFilter}){
   }
 
   function handleBetweenAmounts(identifier, amount){
-    console.log(amount,identifier)
     setBetweenAmounts({...betweenAmounts, [identifier] : amount})
     getFilter({...betweenAmounts, [identifier] : amount})
   }

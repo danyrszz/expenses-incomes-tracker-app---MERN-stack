@@ -41,7 +41,6 @@ export default function useSaveSpend (data, newRecord){
     if(newRecord){
       result = await saveData ( data,endpoints.spends.add(),'post' )
     }else{
-      console.log("here")
       result = await saveData ( data, endpoints.spends.spend(data.id), 'put' )
     }
     if (!result){ 

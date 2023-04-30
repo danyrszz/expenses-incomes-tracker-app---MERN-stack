@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useRef } from "react"
 import { categories } from "../../../utils/endpoints"
 import '../styles/dropdownfilter.css'
 

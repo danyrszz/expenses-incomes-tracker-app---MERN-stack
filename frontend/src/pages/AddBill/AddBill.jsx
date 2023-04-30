@@ -22,7 +22,7 @@ export default function AddBill (){
     showRibbon,
     ribbonMessage,
     changeVisible,
-   } = useSaveBill(data, manageChangeData)
+   } = useSaveBill(data)
   
   function manageChangeData (name,val){
     setData({
