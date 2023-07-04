@@ -12,6 +12,7 @@ const app = express()
 const port = process.env.PORT || 3000
 
 const db = process.env.DB_CONNECTION
+//const db = "mongodb://localhost:27017"
 mongoose.connect(db, {dbName : 'taxi'})
 
 // var corsOptions = {
@@ -29,7 +30,6 @@ app.post('/checkLogin', validateToken, (req,res)=> res.json({message:'usuario co
 app.use('/assets', assets)
 app.use('/spends', spends)
 app.use('/bills', bills)
-
 
 app.listen(port, () => {
   console.log(`Server running...`)

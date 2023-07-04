@@ -1,17 +1,28 @@
 const express = require('express')
 const router = express.Router()
+const user = require('../models/users')
 const jwt = require('jsonwebtoken')
+const bcrypt = require("bcrypt")
 require('dotenv').config()
 
-const password = process.env.PASSWORD
+//const password = process.env.PASSWORD
 
-router.post('/', (req,res)=>{
+router.post('/', async (req,res)=>{
+  const password = await user.find({user : "danyrszz"})
+  const hash = password[0].password
   const requestedPassword = req.body.password
-  if(requestedPassword!=password){
-    return res.json({message : 'incorrect password', signedIn : false})
-  }
-  const token = generateToken(process.env.USER)
-  return res.header({auth:token}).json({message: 'logged in', token: token, signedIn : true, user:process.env.USER})
+
+  bcrypt.compare( requestedPassword, hash, 
+    async function (err, match){
+      if(match){
+        const token = generateToken("danyrszz")
+        return res.header({auth:token}).json({message: 'logged in', token: token, signedIn : true, user:"danyrszz"})
+      }
+      if(!match){
+        return res.json({message : 'incorrect password', signedIn : false})
+      }
+    }
+  )
 })
 
 function generateToken(username){
