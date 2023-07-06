@@ -18,7 +18,6 @@ function validateToken (req,res,next) {
     }else{
       req.user = {}
       req.user.username = decoded.user
-      console.log(decoded)
       next()
     }
   })
