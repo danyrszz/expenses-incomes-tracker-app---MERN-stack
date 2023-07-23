@@ -12,7 +12,6 @@ import TextInput from "../../components/forms/TextInput"
 import InformativeMessage from "../../components/InformativeMessage"
 import ModalContainer from "../../components/Snacks/ModalContainer"
 import ConfirmMessage from "../../components/Snacks/ConfirmMessage"
-import useVerifyLogin from "../../utils/useVerifyLogin"
 
 export default function AddSpend (){
 

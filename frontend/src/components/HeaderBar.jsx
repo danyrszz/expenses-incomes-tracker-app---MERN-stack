@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Menu from './Menu';
 import './styles/HeaderBar.css'
 import { useLocation } from 'react-router-dom';
-import useVerifyLogin from '../utils/useVerifyLogin';
 
 function changeTitle(route){
   const routes = [
@@ -21,10 +20,9 @@ function changeTitle(route){
   })
 }
 
-export default function HeaderBar ({logout}) {
+export default function HeaderBar ({logout, isLogged}) {
   const [isLoggedIn, setIsLoggedIn] = useState (false)
   const token = localStorage.getItem("token")
-  const {checkLogin} = useVerifyLogin(token);
 
   const [title, setTitle] = useState('Dashboard');
   const location = useLocation()
@@ -32,12 +30,6 @@ export default function HeaderBar ({logout}) {
   useEffect(()=>{
     setTitle(changeTitle(location.pathname).title)
   },[location])
-
-  useEffect(()=>{
-    checkLogin(token).then(resp=>{
-      resp ? setIsLoggedIn(true) : setIsLoggedIn(false)
-    })
-  },[checkLogin])
 
   return(
     <div className='header'>
@@ -56,7 +48,7 @@ export default function HeaderBar ({logout}) {
       <div className="header-ex">
         <p>{title}</p>
         {
-          isLoggedIn && <a onClick={logout} className='logout-click' > Cerrar Sesión </a>
+          isLogged && <a onClick={logout} className='logout-click' > Cerrar Sesión </a>
         }
       </div>
     </div>

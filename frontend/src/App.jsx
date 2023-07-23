@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <HeaderBar logout={logout}/>
+      <HeaderBar logout={logout} isLogged={loggedIn}/>
       {loggedIn ? <Outlet/> : <Login login={login} loading={loggingIn}/>}
     </div>
   )
