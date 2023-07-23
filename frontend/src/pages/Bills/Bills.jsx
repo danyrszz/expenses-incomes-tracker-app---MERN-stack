@@ -10,11 +10,8 @@ import NoData from '../../components/NoData'
 import MonthYearSelector from './components/MonthYearSelector'
 import ModalContainer from '../../components/Snacks/ModalContainer'
 import EditBill from './EditBill'
-import useVerifyLogin from '../../utils/useVerifyLogin'
-export default function Bills(){
 
-  const token = localStorage.getItem("token")
-  useVerifyLogin(token)
+export default function Bills(){
   
   const [dates, setDates] = useState (getDates(getCurrentDate().month,getCurrentDate().year))
 

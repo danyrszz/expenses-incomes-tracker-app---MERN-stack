@@ -4,12 +4,8 @@ import useGetLastBills from './useGetLastBills'
 import useGetLastSpends from './useGetLastSpends'
 import { getDashedShortDate } from '../../utils/date'
 import reduceTo from '../../utils/misc'
-import useVerifyLogin from '../../utils/useVerifyLogin'
 
 export default function Dashboard(){
-
-  const token = localStorage.getItem("token")
-  useVerifyLogin(token)
 
   const [data] = useGetAssets()
   const {lastBills} = useGetLastBills(5)

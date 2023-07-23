@@ -1,13 +1,11 @@
-import useAuth from "../utils/useAuth"
-import Loading from "../components/Loading"
 import "./Login.css"
+import Loading from "../components/Loading"
 
-export default function Login(){
+export default function Login({login, loading}){
   
-  const {login, loggingIn} = useAuth()
   return (
     <>
-      {loggingIn ?( 
+      {loading ?( 
         <Loading></Loading>
       ) : (
         <div className="login-wrapper flex-centered">

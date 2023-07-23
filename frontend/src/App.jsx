@@ -1,14 +1,19 @@
+
 import './App.css'
 import HeaderBar from './components/HeaderBar'
 import { Outlet } from 'react-router-dom'
-import { useContext } from 'react'
+
+import Login from './pages/Login'
+import useAuth from './utils/useAuth'
 
 function App() {
 
+  const {login, logout, loggingIn, loggedIn} = useAuth()
+
   return (
     <div className="App">
-      <HeaderBar/>
-      <Outlet/>
+      <HeaderBar logout={logout}/>
+      {loggedIn ? <Outlet/> : <Login login={login} loading={loggingIn}/>}
     </div>
   )
 }

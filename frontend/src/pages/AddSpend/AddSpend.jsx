@@ -15,9 +15,6 @@ import ConfirmMessage from "../../components/Snacks/ConfirmMessage"
 import useVerifyLogin from "../../utils/useVerifyLogin"
 
 export default function AddSpend (){
-  
-  const token = localStorage.getItem("token")
-  useVerifyLogin(token)
 
   const [data, setData] = useState({payed:false})
   const [newRecord, setNewRecord] = useState(true)

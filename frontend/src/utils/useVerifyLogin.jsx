@@ -9,7 +9,7 @@ export default function useVerifyLogin(token){
 
   useEffect(()=>{
     checkLogin(token).then((res)=>{
-      if(!res) navigate("/login")
+      if(!res) navigate("/")
     })
   },[])
 

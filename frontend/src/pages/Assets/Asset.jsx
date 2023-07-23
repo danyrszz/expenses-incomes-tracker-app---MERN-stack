@@ -4,12 +4,9 @@ import ProgressBar from '../../components/ProgressBar'
 import Loading from '../../components/Loading'
 import './Asset.css'
 import { getFormattedDate } from '../../utils/date'
-import useVerifyLogin from '../../utils/useVerifyLogin'
 
 export default function Asset () {
 
-  const token = localStorage.getItem("token")
-  useVerifyLogin(token)
 
   const [data] = useGetAssets()
   const assetPage =

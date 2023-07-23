@@ -7,6 +7,7 @@ export default function useAuth (){
 
   const navigate = useNavigate()
   const [loggingIn, setLoggingIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
   async function login(e){
     e.preventDefault()
@@ -20,7 +21,8 @@ export default function useAuth (){
     )
     if(response.signedIn){
       localStorage.setItem('token', response.token)
-      navigate("/")
+      setLoggedIn(true)
+      setLoggingIn(false)
     }else{
       setLoggingIn(false)
       return alert("La constraseña es incorrecta.")
@@ -30,8 +32,8 @@ export default function useAuth (){
   function logout (){
     localStorage.removeItem('token')
     setLoggingIn(false)
-    navigate('/login')
+    setLoggedIn(false)
   }
 
-  return {login, logout, loggingIn}
+  return {login, logout, loggingIn, loggedIn}
 }

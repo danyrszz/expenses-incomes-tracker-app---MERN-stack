@@ -3,7 +3,6 @@ import Menu from './Menu';
 import './styles/HeaderBar.css'
 import { useLocation } from 'react-router-dom';
 import useVerifyLogin from '../utils/useVerifyLogin';
-import useAuth from '../utils/useAuth';
 
 function changeTitle(route){
   const routes = [
@@ -22,8 +21,7 @@ function changeTitle(route){
   })
 }
 
-export default function HeaderBar () {
-  const {logout} = useAuth()
+export default function HeaderBar ({logout}) {
   const [isLoggedIn, setIsLoggedIn] = useState (false)
   const token = localStorage.getItem("token")
   const {checkLogin} = useVerifyLogin(token);
