@@ -34,3 +34,5 @@ app.use('/bills', bills)
 app.listen(port, () => {
   console.log(`Server running...`)
 })
+
+module.exports = app
