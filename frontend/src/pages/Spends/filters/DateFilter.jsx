@@ -60,7 +60,9 @@ export default function DateFilter ({getFilter}){
             <DatePicker 
               selected={currentDate} 
               onChange={(val) => manageChangeDates("before",val)}
-            />
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"/>          
           </div>
       </div>
 
@@ -71,7 +73,9 @@ export default function DateFilter ({getFilter}){
             <DatePicker 
               selected={currentDate} 
               onChange={(val) => manageChangeDates("after",val)}
-            />
+              showMonthDropdown
+              showYearDropdown
+              dropdownMode="select"/>
           </div>
       </div>
 
@@ -84,6 +88,9 @@ export default function DateFilter ({getFilter}){
                 selected={betweenDates.start} 
                 onChange={(val) => handleBetweenDates("start",val)}
                 wrapperClassName="inline-datepicker"
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
               />
             </div> 
             <span> y </span> 

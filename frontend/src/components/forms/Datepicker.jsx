@@ -37,7 +37,11 @@ export default function Datepicker ({setData, currentDate}){
             setDate(date)
             setData(date)
             }}
-          customInput={<DatepickerButton />} />
+          customInput={<DatepickerButton />}
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+        />
       </div>
     </div>
   )
