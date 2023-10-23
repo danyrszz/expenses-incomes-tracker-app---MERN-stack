@@ -6,7 +6,6 @@ const {getAsset, updateRecoveryProgress} = require('./common')
 
 const spend = require('../models/spends')
 
-
 //get all of the spends
 //AGREGAR PAGINATION PENDIENTE
 router.get('/', async (req,res,next)=>{
@@ -19,37 +18,6 @@ router.get('/', async (req,res,next)=>{
 
 router.get('/id/:id', getSpend, (req,res)=> res.json(res.data))
 
-//sort all spends by amount 
-// router.get('/', async(req,res)=>{
-//   try {
-//     const spends = await spend.find().sort({amount:req.query.order}).populate('asset','name -_id')
-//     res.json(spends)    
-//   } catch (error) {
-//     res.status(400).json(responseObject(error,false,"Error al filtrar los gastos por cantidad"))
-//   }
-// })
-
-//get spends filtered by category
-// router.get('/category/:category', async (req,res,next)=>{
-//   try{
-//     res.json( await spend.find({category : req.params.category}).populate('asset', 'name -_id'))
-//   }catch(error){
-//     res.status(400).json(responseObject(error,false,"ha ocurrido un error al obtener los gastos por categoria"))
-//   }
-// })
-
-//get spends filtered by amount
-// router.get('/betweenamount/:min-:max/', async(req,res, next)=>{
-//   const min = req.params.min
-//   const max = req.params.max
-//   try {
-//     const spends = await spend.find({amount:{$gte:min, $lte:max}}).populate('asset', 'name -_id')
-//     res.json(spends)    
-//   } catch (error) {
-//     res.status(400).json(responseObject(error,false,"Error obteniendo los gastos filtrados por cantidad"))
-//   }
-// })
-
 //get the last x number of spends
 router.get('/last/:quantity', async(req,res)=>{
   const number = req.params.quantity
@@ -60,20 +28,6 @@ router.get('/last/:quantity', async(req,res)=>{
     res.status(400).json(responseObject(error,false,"Error al filtrar los gastos"))
   }
 })
-
-//get all of the spends ordered by date 
-// router.get('/betweendates/:date1/:date2', async (req,res)=>{
-//   try{
-//     const spends = 
-//     await spend.find(
-//       {date: { $gte : new Date(req.params.date1) , $lte: new Date(req.params.date2) } }
-//     )
-//     .populate('asset')
-//     res.json(spends)
-//   } catch(error) {
-//     res.status(400).json(responseObject(error, false, "Error obteniendo los gastos filtrados por rango de fechas"))
-//   }
-// })
 
 //get all the spends by one or more filter
 router.get('/filter', async (req,res)=>{
@@ -125,6 +79,24 @@ router.post("/filter", async (req,res)=>{
   }catch(error){
     res.status(400).json(responseObject(null,false,"No se ha podido filtrar la información"))
     return
+  }
+})
+
+//gets the results of a text search ordered by date
+router.post('/search', async (req,res)=>{
+  const searchQuery = req.body.query
+  try{
+    const results = await spend.aggregate().search(
+      {
+        index: 'spendsSearch',
+        text : {
+        query : searchQuery,
+        path : ['name','description'],
+        fuzzy : {}
+      }}).sort({date:1})
+    res.status(200).json(results)
+  }catch(e){
+    res.status(400).json(responseObject(e,false,"Error"))
   }
 })
 
