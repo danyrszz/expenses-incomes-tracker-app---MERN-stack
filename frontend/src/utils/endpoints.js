@@ -1,6 +1,6 @@
 
-const domain = import.meta.env.VITE_API_SERVICE
-//const domain = 'http://localhost:3000'
+// const domain = import.meta.env.VITE_API_SERVICE
+const domain = 'http://localhost:3000'
 
 export const endpoints = {
   assets : () => `${domain}/assets`,
@@ -16,6 +16,7 @@ export const endpoints = {
     spend : (id) => `${domain}/spends/id/${id}`,
     add : () => `${domain}/spends`,
     filter : () => `${domain}/spends/filter`,
+    search : () => `${domain}/spends/search`
   },
   login: ()=> `${domain}/login`,
   checkLogin : ()=> `${domain}/checkLogin`

@@ -24,7 +24,6 @@ export default function useFilterSpends(date, category, amount){
   }
 
   async function getFilteredSpends (filterOptions) {
-    console.log(filterOptions)
     return await saveData(endpoints.spends.filter(),'post', filterOptions)
   }
 
