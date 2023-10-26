@@ -8,13 +8,16 @@ function useSearch() {
   const [numberOfResults, setNumberOfResults] = useState(0)
   const [isSearchActive, setIsSearchActive] = useState(false)
 
+  async function getResults (query) {
+    return await saveData(endpoints.spends.search(),'post', query)
+  }
+
   async function handleSearch (value) {
-    const url = endpoints.spends.search()
     if(!value){
       setIsSearchActive(false)
       return
     }
-    const res = await saveData(url,'POST', {query:value})
+    const res = await getResults({query:value})
     setData(res)
     setNumberOfResults(res.length)
     setIsSearchActive(true)

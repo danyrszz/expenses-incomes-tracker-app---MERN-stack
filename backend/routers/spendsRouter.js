@@ -85,6 +85,7 @@ router.post("/filter", async (req,res)=>{
 //gets the results of a text search ordered by date
 router.post('/search', async (req,res)=>{
   const searchQuery = req.body.query
+  console.log(searchQuery)
   try{
     const results = await spend.aggregate().search(
       {
