@@ -15,19 +15,11 @@ const db = process.env.DB_CONNECTION
 //const db = "mongodb://localhost:27017"
 mongoose.connect(db, {dbName : 'taxi'})
 
-// var corsOptions = {
-//   origin: 'localhost:3000',
-//   optionsSuccessStatus: 200
-// }
-
 app.use(express.json()) 
-app.use(cors())
+app.use(cors({
+  origin: 'https://taxi-dpob.onrender.com/'
+}));
 app.use(express.urlencoded({ extended: true }))
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://taxi-dpob.onrender.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.use('/login', login)
 app.post('/checkLogin', validateToken, (req,res)=> res.json({message:'usuario conectado', loggedIn:true, user: req.user.username}))
