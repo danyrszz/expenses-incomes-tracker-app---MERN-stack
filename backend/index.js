@@ -1,7 +1,6 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
-const cors = require('cors')
 const assets = require('./routers/assetsRouter')
 const spends = require ('./routers/spendsRouter')
 const bills = require ('./routers/billsRouter')
@@ -16,9 +15,6 @@ const db = process.env.DB_CONNECTION
 mongoose.connect(db, {dbName : 'taxi'})
 
 app.use(express.json()) 
-app.use(cors({
-  origin: 'https://taxi-dpob.onrender.com/'
-}));
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/login', login)
