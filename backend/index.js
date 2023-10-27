@@ -6,6 +6,7 @@ const spends = require ('./routers/spendsRouter')
 const bills = require ('./routers/billsRouter')
 const login = require ('./routers/loginRouter')
 const {validateToken} = require('./utils/utils')
+var cors = require('cors')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -17,13 +18,13 @@ mongoose.connect(db, {dbName : 'taxi'})
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true }))
 
+app.use(cors())
 app.use('/login', login)
 app.post('/checkLogin', validateToken, (req,res)=> res.json({message:'usuario conectado', loggedIn:true, user: req.user.username}))
 
 app.use('/assets', assets)
 app.use('/spends', spends)
 app.use('/bills', bills)
-
 app.listen(port, () => {
   console.log(`Server running...`)
 })
