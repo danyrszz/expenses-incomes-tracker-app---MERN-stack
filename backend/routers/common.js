@@ -24,7 +24,6 @@ async function updateRecoveryProgress(req,res){
     }else if (asset.realEarnings >= 0){
       asset.investmentRecoveryProgress = 100
       await asset.save()
-      console.log("here")
       return res.status(200).json(responseObject(null,true,"Toda la informacion actualizada correctamente"))
     }
     //return res.json("inversion recuperada")
