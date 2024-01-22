@@ -1,4 +1,6 @@
 
+//CONEXION CON EL BACKEND
+
 const domain = import.meta.env.VITE_API_SERVICE
 //const domain = 'http://localhost:3000'
 
