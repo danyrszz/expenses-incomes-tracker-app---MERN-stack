@@ -37,6 +37,7 @@ export default function useSaveBill(data){
     date : data.date,
     assetId : currentAsset
     })
+    console.log(result)
     if (!result){ 
       setSavingParams('Algo salio mal, intenta de nuevo.',false,true)
       return
@@ -50,6 +51,7 @@ export default function useSaveBill(data){
   
   async function saveData (body) {
     const res = await store( endpoints.bills.add(), 'POST', body )
+    console.log(res)
     if(res.ok) return true
     return false
   }

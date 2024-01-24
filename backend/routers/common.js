@@ -26,7 +26,6 @@ async function updateRecoveryProgress(req,res){
       await asset.save()
       return res.status(200).json(responseObject(null,true,"Toda la informacion actualizada correctamente"))
     }
-    //return res.json("inversion recuperada")
   }catch(error){
     res.status(500).json(responseObject(error,false,"ha ocurrido un error al actualizar el porcentaje"))
   }
